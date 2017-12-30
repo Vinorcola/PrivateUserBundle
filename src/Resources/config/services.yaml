@@ -6,8 +6,8 @@ services:
         public: false
 
     Vinorcola\PrivateUserBundle\:
-        resource: '../src/*'
-        exclude: '../src/{Data,Entity,Resources}'
+        resource: '../../*'
+        exclude: '../../{Data,Entity,Resources}'
 
     Vinorcola\PrivateUserBundle\Controller\:
         resource: '../../Controller'
