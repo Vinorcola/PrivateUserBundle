@@ -2,7 +2,6 @@
 
 namespace Vinorcola\PrivateUserBundle\Repository;
 
-use App\Repository\Repository;
 use Vinorcola\PrivateUserBundle\Entity\User;
 use Vinorcola\PrivateUserBundle\Model\UserInterface;
 

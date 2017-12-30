@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository;
+namespace Vinorcola\PrivateUserBundle\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
