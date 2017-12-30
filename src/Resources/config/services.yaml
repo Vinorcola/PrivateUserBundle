@@ -5,4 +5,8 @@ services:
         autoconfigure: true
         public: false
 
+    Vinorcola\PrivateUserBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
     Vinorcola\PrivateUserBundle\Model\UserManagerInterface: '@Vinorcola\PrivateUserBundle\Model\UserManager'
