@@ -1,0 +1,8 @@
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Vinorcola\PrivateUserBundle\Model\UserManagerInterface: Vinorcola\PrivateUserBundle\Model\UserManager

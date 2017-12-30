@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 
+/**
+ * @Route(name="private_user.admin.")
+ */
 class AdminController extends Controller
 {
     /**
