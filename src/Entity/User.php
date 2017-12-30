@@ -2,6 +2,7 @@
 
 namespace Vinorcola\PrivateUserBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping;
 use Ramsey\Uuid\Uuid;
 use Vinorcola\PrivateUserBundle\Model\BaseUser;
@@ -68,6 +69,20 @@ class User extends BaseUser
      * @Mapping\Column(type="boolean")
      */
     private $enabled;
+
+    /**
+     * @var string|null
+     *
+     * @Mapping\Column(type="guid", nullable=true)
+     */
+    private $token;
+
+    /**
+     * @var DateTime|null
+     *
+     * @Mapping\Column(type="datetime", nullable=true)
+     */
+    private $tokenExpirationDate;
 
     /**
      * User constructor.
