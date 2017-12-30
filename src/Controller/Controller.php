@@ -11,6 +11,6 @@ abstract class Controller extends BaseController
      */
     protected function saveDatabase(): void
     {
-        return $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()->getManager()->flush();
     }
 }
