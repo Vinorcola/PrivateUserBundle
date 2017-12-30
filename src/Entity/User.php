@@ -29,6 +29,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @Mapping\Column(type="string",length=254, unique=true)
+     */
+    private $uniqueEmailAddress;
+
+    /**
+     * @var string
+     *
      * @Mapping\Column(type="string", length=80)
      */
     private $firstName;
@@ -73,6 +80,7 @@ class User extends BaseUser
     {
         $this->id = Uuid::uuid4()->toString();
         $this->emailAddress = $emailAddress;
+        $this->uniqueEmailAddress = mb_strtolower($emailAddress);
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->roles = $roles;

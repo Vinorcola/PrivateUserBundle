@@ -1,0 +1,12 @@
+
+private_user:
+    user:
+        emailAddress: "Adresse e-mail"
+        firstName: "Prénom"
+        lastName: "Nom"
+        sendInvitation: "Envoyer une invitation par e-mail ?"
+
+    admin:
+        create:
+            title: "Création d’un nouvel utilisateur"
+            submit: "Ajouter l’utilisateur"
