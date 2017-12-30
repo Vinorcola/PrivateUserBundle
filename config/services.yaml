@@ -6,11 +6,11 @@ services:
         public: false
 
     Vinorcola\PrivateUserBundle\:
-        resource: '../../*'
-        exclude: '../../{Data,Entity,Resources}'
+        resource: '../src/*'
+        exclude: '../src/{Data,Entity,Resources}'
 
     Vinorcola\PrivateUserBundle\Controller\:
-        resource: '../../Controller'
+        resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
     Vinorcola\PrivateUserBundle\Model\UserManagerInterface: '@Vinorcola\PrivateUserBundle\Model\UserManager'
