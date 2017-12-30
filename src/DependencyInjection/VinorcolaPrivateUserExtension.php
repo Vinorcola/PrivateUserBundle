@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinorcola\PrivateUserBundle;
+namespace Vinorcola\PrivateUserBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
