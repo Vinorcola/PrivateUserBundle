@@ -58,7 +58,7 @@ class User extends BaseUser
     /**
      * @var string|null
      *
-     * @Mapping\Column(type="string", length=60)
+     * @Mapping\Column(type="string", length=60, nullable=true)
      */
     private $password;
 
