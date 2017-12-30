@@ -8,6 +8,7 @@ use Vinorcola\PrivateUserBundle\Model\BaseUser;
 
 /**
  * @Mapping\Entity()
+ * @Mapping\Table(name="`user`")
  */
 class User extends BaseUser
 {
