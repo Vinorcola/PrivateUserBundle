@@ -5,6 +5,10 @@ services:
         autoconfigure: true
         public: false
 
+    Vinorcola\PrivateUserBundle\:
+        resource: '../src/*'
+        exclude: '../src/{Data,Entity,Resources}'
+
     Vinorcola\PrivateUserBundle\Controller\:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
