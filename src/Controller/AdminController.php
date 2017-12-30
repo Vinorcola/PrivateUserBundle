@@ -31,7 +31,7 @@ class AdminController extends Controller
             $this->saveDatabase();
         }
 
-        return $this->render('@PrivateUser/Admin/create.html.twig', [
+        return $this->render('@VinorcolaPrivateUser/Admin/create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
