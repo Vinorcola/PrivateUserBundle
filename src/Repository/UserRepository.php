@@ -3,7 +3,7 @@
 namespace Vinorcola\PrivateUserBundle\Repository;
 
 use Vinorcola\PrivateUserBundle\Entity\User;
-use Vinorcola\PrivateUserBundle\Model\UserInterface;
+use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
 
 class UserRepository extends Repository implements UserRepositoryInterface
 {
@@ -18,7 +18,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function add(UserInterface $user): void
+    public function add(EditableUserInterface $user): void
     {
         $this->entityManager->persist($user);
     }
@@ -26,7 +26,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find(string $emailAddress): ?UserInterface
+    public function find(string $emailAddress): ?EditableUserInterface
     {
         return $this
             ->createQueryBuilder('u')

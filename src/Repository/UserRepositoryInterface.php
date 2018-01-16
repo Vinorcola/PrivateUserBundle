@@ -2,22 +2,22 @@
 
 namespace Vinorcola\PrivateUserBundle\Repository;
 
-use Vinorcola\PrivateUserBundle\Model\UserInterface;
+use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
 
 interface UserRepositoryInterface
 {
     /**
      * Persist the user in the repository.
      *
-     * @param UserInterface $user
+     * @param EditableUserInterface $user
      */
-    public function add(UserInterface $user): void;
+    public function add(EditableUserInterface $user): void;
 
     /**
      * Find the user identified by the given email address.
      *
      * @param string $emailAddress
-     * @return UserInterface|null
+     * @return EditableUserInterface|null
      */
-    public function find(string $emailAddress): ?UserInterface;
+    public function find(string $emailAddress): ?EditableUserInterface;
 }

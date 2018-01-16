@@ -10,3 +10,20 @@ private_user:
         create:
             title: "Création d’un nouvel utilisateur"
             submit: "Ajouter l’utilisateur"
+
+    registration:
+        requireRegistration:
+            submit: "Créer mon compte"
+            unknownUser: "Utilisateur inconnu."
+            alreadyRegistered: "Un compte utilisateur existe déjà pour cette adresse e-mail."
+
+        confirmRegistrationRequest:
+            message: "Un e-mail vient d’être envoyé à l’adresse %emailAddress%. Cet e-mail contient un lien qui vous permettra de choisir le mot de passe de votre compte."
+
+    security:
+        login:
+            emailAddress: "Votre adresse e-mail"
+            password: "Votre mot de passe"
+            submit: "Se connecter"
+            passwordForgotten: "Mot de passe oublié ?"
+            createAccount: "Créer mon compte"
