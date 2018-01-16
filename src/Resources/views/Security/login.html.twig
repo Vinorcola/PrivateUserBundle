@@ -1,0 +1,35 @@
+{% extends '@VinorcolaPrivateUser/layout.html.twig' %}
+
+
+
+{% block body %}
+    <div id="login-form">
+        {% if hasError %}
+            <div class="alert alert-danger">
+                <p>{{ errorMessageKey|trans(errorMessageData, 'security') }}</p>
+            </div>
+        {% endif %}
+
+        <form action="{{ path('private_user.security.loginCheck') }}" method="post">
+            <div class="form-group">
+                <label for="emailAddress">{{ 'private_user.security.login.emailAddress'|trans }}</label>
+                <input type="email" id="emailAddress" name="_username" class="form-control" value="{{ lastEmailAddress }}" required />
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'private_user.security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" class="form-control" required />
+            </div>
+
+            <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}" />
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-lg btn-primary">{{ 'private_user.security.login.submit'|trans }}</button>
+            </div>
+        </form>
+
+        <p>
+            <a href="#">{{ 'private_user.security.login.passwordForgotten'|trans }}</a>
+            <a href="#">{{ 'private_user.security.login.createAccount'|trans }}</a>
+        </p>
+    </div>
+{% endblock %}
