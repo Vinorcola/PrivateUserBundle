@@ -2,25 +2,40 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
+use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 use Vinorcola\PrivateUserBundle\Data\CreateUser;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 
 interface UserManagerInterface
 {
     /**
-     * Create a new user using data in the dto.
+     * Create a new user using data in the data.
      *
-     * @param CreateUser $dto
+     * @param CreateUser $data
      * @return UserInterface
      */
-    public function create(CreateUser $dto): UserInterface;
+    public function create(CreateUser $data): UserInterface;
 
     /**
-     * Update a user using data in the dto.
+     * Update a user using data in the data.
      *
      * @param EditableUserInterface $user
-     * @param EditUser              $dto
-     * @return mixed
+     * @param EditUser              $data
      */
-    public function update(EditableUserInterface $user, EditUser $dto);
+    public function update(EditableUserInterface $user, EditUser $data): void;
+
+    /**
+     * Update the user's password.
+     *
+     * @param EditableUserInterface $user
+     * @param ChangePassword        $data
+     */
+    public function updatePassword(EditableUserInterface $user, ChangePassword $data): void;
+
+    /**
+     * Generate a token for a user.
+     *
+     * @param EditableUserInterface $user
+     */
+    public function generateToken(EditableUserInterface $user): void;
 }

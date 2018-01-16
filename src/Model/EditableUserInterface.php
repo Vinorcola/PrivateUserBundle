@@ -2,7 +2,9 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
-interface EditableUserInterface
+use DateTime;
+
+interface EditableUserInterface extends UserInterface
 {
     /**
      * Change the user's first and last names.
@@ -20,6 +22,13 @@ interface EditableUserInterface
     public function setRoles(array $roles): void;
 
     /**
+     * Set a new password for the user account.
+     *
+     * @param string $password
+     */
+    public function setPassword(string $password);
+
+    /**
      * Enable the user.
      *
      * An enabled user can connect to the application.
@@ -32,4 +41,16 @@ interface EditableUserInterface
      * A disabled user cannot connect to the application.
      */
     public function disable(): void;
+
+    /**
+     * Generate a new token for activation or password change.
+     *
+     * @param DateTime $tokenExpirationDate
+     */
+    public function generateToken(DateTime $tokenExpirationDate);
+
+    /**
+     * Erase the activation or change password token.
+     */
+    public function eraseToken();
 }

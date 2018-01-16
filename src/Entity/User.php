@@ -24,7 +24,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @Mapping\Column(type="string", length=254, unique=true)
+     * @Mapping\Column(type="string", length=254)
      */
     private $emailAddress;
 
@@ -124,6 +124,14 @@ class User extends BaseUser
     /**
      * {@inheritdoc}
      */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function enable(): void
     {
         $this->enabled = true;
@@ -135,6 +143,24 @@ class User extends BaseUser
     public function disable(): void
     {
         $this->enabled = false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateToken(DateTime $tokenExpirationDate)
+    {
+        $this->token = Uuid::uuid4()->toString();
+        $this->tokenExpirationDate = $tokenExpirationDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function eraseToken()
+    {
+        $this->token = null;
+        $this->tokenExpirationDate = null;
     }
 
     /**
@@ -193,5 +219,21 @@ class User extends BaseUser
     public function isEnabled(): bool
     {
         return $this->enabled;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getTokenExpirationDate(): DateTime
+    {
+        return $this->tokenExpirationDate;
     }
 }

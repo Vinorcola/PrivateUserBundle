@@ -2,7 +2,7 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
-abstract class BaseUser implements UserInterface, EditableUserInterface
+abstract class BaseUser implements EditableUserInterface
 {
     /**
      * {@inheritdoc}
