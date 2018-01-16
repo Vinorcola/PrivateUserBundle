@@ -1,0 +1,12 @@
+{% extends '@VinorcolaPrivateUser/emailLayout.html.twig' %}
+
+
+
+{% block body %}
+    {% set link = url('private_user.registration.register', { token: user.token }) %}
+
+    <h2>{{ 'private_user.email.registration.title'|trans }}</h2>
+    <p>{{ 'private_user.email.registration.greeting'|trans({ '%name%': user.name }) }}</p>
+    <p>{{ 'private_user.email.registration.content'|trans }}</p>
+    <p><a href="{{ link }}">{{ link }}</a></p>
+{% endblock %}

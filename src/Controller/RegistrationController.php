@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Vinorcola\PrivateUserBundle\Data\FindUser;
 use Vinorcola\PrivateUserBundle\Form\FindUserType;
+use Vinorcola\PrivateUserBundle\Model\EmailModel;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
@@ -22,12 +23,14 @@ class RegistrationController extends Controller
      * @param Request                 $request
      * @param UserRepositoryInterface $repository
      * @param UserManagerInterface    $userManager
+     * @param EmailModel              $emailModel
      * @return Response
      */
     public function requireRegistration(
         Request $request,
         UserRepositoryInterface $repository,
-        UserManagerInterface $userManager
+        UserManagerInterface $userManager,
+        EmailModel $emailModel
     ): Response {
 
         $form = $this->createForm(FindUserType::class);
@@ -44,7 +47,7 @@ class RegistrationController extends Controller
                 $userManager->generateToken($user);
                 $this->saveDatabase();
 
-                // TODO: Send e-mail.
+                $emailModel->sendRegistrationEmail($user);
 
                 return $this->redirectToRoute('private_user.registration.confirmRegistrationRequest', [
                     'emailAddress' => $data->emailAddress,
@@ -69,5 +72,20 @@ class RegistrationController extends Controller
         return $this->render('@VinorcolaPrivateUser/Registration/confirmRegistrationRequest.html.twig', [
             'emailAddress' => $emailAddress,
         ]);
+    }
+
+    /**
+     * @Route("/register/{token}", name="register", requirements={
+     *     "token": "[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
+     * })
+     * @Method({"GET", "POST"})
+     *
+     * @param Request $request
+     * @param string  $token
+     * @return Response
+     */
+    public function register(Request $request, string $token): Response
+    {
+
     }
 }

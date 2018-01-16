@@ -11,6 +11,12 @@ private_user:
             title: "Création d’un nouvel utilisateur"
             submit: "Ajouter l’utilisateur"
 
+    email:
+        registration:
+            title: "Création de votre compte"
+            greeting: "Bonjour %name%,"
+            content: "Veuillez cliquer sur le lien ci-dessous pour choisir votre mot de passe et créer votre compte :"
+
     registration:
         requireRegistration:
             submit: "Créer mon compte"
