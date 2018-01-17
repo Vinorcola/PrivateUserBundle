@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Vinorcola\PrivateUserBundle\Data\FindUser;
+use Vinorcola\PrivateUserBundle\Form\ChangePasswordType;
 use Vinorcola\PrivateUserBundle\Form\FindUserType;
 use Vinorcola\PrivateUserBundle\Model\EmailModel;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
@@ -80,12 +81,47 @@ class RegistrationController extends Controller
      * })
      * @Method({"GET", "POST"})
      *
-     * @param Request $request
-     * @param string  $token
+     * @param Request                 $request
+     * @param string                  $token
+     * @param UserRepositoryInterface $repository
+     * @param UserManagerInterface    $userManager
      * @return Response
      */
-    public function register(Request $request, string $token): Response
-    {
+    public function register(
+        Request $request,
+        string $token,
+        UserRepositoryInterface $repository,
+        UserManagerInterface $userManager
+    ): Response {
 
+        $user = $repository->findByRegistrationToken($token);
+        if (!$user) {
+            return $this->render('@VinorcolaPrivateUser/Registration/rejectRegistration.html.twig');
+        }
+
+        $form = $this->createForm(ChangePasswordType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userManager->updatePassword($user, $form->getData());
+            $userManager->logUserIn($user);
+            $this->saveDatabase();
+
+            return $this->redirectToRoute('private_user.registration.confirmRegistration');
+        }
+
+        return $this->render('@VinorcolaPrivateUser/Registration/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/register/confirm", name="confirmRegistration")
+     * @Method("GET")
+     *
+     * @return Response
+     */
+    public function confirmRegistration(): Response
+    {
+        return $this->render('@VinorcolaPrivateUser/Registration/confirmRegistration.html.twig');
     }
 }

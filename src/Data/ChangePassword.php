@@ -7,10 +7,5 @@ class ChangePassword
     /**
      * @var string
      */
-    public $previousPassword;
-
-    /**
-     * @var string
-     */
-    public $newPassword;
+    public $password;
 }

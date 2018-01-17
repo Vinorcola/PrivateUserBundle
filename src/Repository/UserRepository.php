@@ -2,6 +2,7 @@
 
 namespace Vinorcola\PrivateUserBundle\Repository;
 
+use DateTime;
 use Vinorcola\PrivateUserBundle\Entity\User;
 use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
 
@@ -32,6 +33,36 @@ class UserRepository extends Repository implements UserRepositoryInterface
             ->createQueryBuilder('u')
             ->where('u.emailAddress = :emailAddress')
             ->setParameter('emailAddress', $emailAddress)
+            ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByRegistrationToken(string $token): ?EditableUserInterface
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->where('u.token = :token')
+            ->andWhere('u.tokenExpirationDate >= :now')
+            ->andWhere('u.password IS NULL')
+            ->setParameter('token', $token)
+            ->setParameter('now', new DateTime())
+            ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByPasswordChangeToken(string $token): ?EditableUserInterface
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->where('u.token = :token')
+            ->andWhere('u.tokenExpirationDate >= :now')
+            ->andWhere('u.password IS NOT NULL')
+            ->setParameter('token', $token)
+            ->setParameter('now', new DateTime())
             ->getQuery()->getOneOrNullResult();
     }
 }

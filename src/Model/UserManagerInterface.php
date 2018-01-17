@@ -38,4 +38,11 @@ interface UserManagerInterface
      * @param EditableUserInterface $user
      */
     public function generateToken(EditableUserInterface $user): void;
+
+    /**
+     * Log the user in.
+     *
+     * @param UserInterface $user
+     */
+    public function logUserIn(UserInterface $user): void;
 }

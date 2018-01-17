@@ -26,6 +26,15 @@ private_user:
         confirmRegistrationRequest:
             message: "Un e-mail vient d’être envoyé à l’adresse %emailAddress%. Cet e-mail contient un lien qui vous permettra de choisir le mot de passe de votre compte."
 
+        register:
+            rejectMessage: "Lien invalide. Merci de recommencer la procédure."
+            rejectRetry: "Recommencer la procédure."
+            submit: "Définir mon mot de passe"
+
+        confirmRegistration:
+            message: "Votre compte a été créé avec succès."
+            start: "Cliquez-ici pour continuer"
+
     security:
         login:
             emailAddress: "Votre adresse e-mail"

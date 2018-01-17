@@ -4,6 +4,8 @@ namespace Vinorcola\PrivateUserBundle\Model;
 
 use DateInterval;
 use DateTime;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 use Vinorcola\PrivateUserBundle\Data\CreateUser;
@@ -29,15 +31,25 @@ class UserManager implements UserManagerInterface
     private $passwordEncoder;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * UserManager constructor.
      *
      * @param UserRepositoryInterface      $repository
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param TokenStorageInterface        $tokenStorage
      */
-    public function __construct(UserRepositoryInterface $repository, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        UserRepositoryInterface $repository,
+        UserPasswordEncoderInterface $passwordEncoder,
+        TokenStorageInterface $tokenStorage
+    ) {
         $this->repository = $repository;
         $this->passwordEncoder = $passwordEncoder;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -66,7 +78,7 @@ class UserManager implements UserManagerInterface
      */
     public function updatePassword(EditableUserInterface $user, ChangePassword $data): void
     {
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $data->newPassword));
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $data->password));
         $user->eraseToken();
     }
 
@@ -78,5 +90,15 @@ class UserManager implements UserManagerInterface
         $validity = new DateTime();
         $validity->add(new DateInterval('PT' . self::TOKEN_VALIDITY . 'M'));
         $user->generateToken($validity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function logUserIn(UserInterface $user): void
+    {
+        $this->tokenStorage->setToken(
+            new UsernamePasswordToken($user, null, 'main', $user->getRoles())
+        );
     }
 }

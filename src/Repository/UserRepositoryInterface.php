@@ -20,4 +20,24 @@ interface UserRepositoryInterface
      * @return EditableUserInterface|null
      */
     public function find(string $emailAddress): ?EditableUserInterface;
+
+    /**
+     * Find the user identified by the given registration token.
+     *
+     * Note that function must take care of token expiration date. If token is expired, no user must be returned.
+     *
+     * @param string $token
+     * @return EditableUserInterface|null
+     */
+    public function findByRegistrationToken(string $token): ?EditableUserInterface;
+
+    /**
+     * Find the user identified by the given password change token.
+     *
+     * Note that function must take care of token expiration date. If token is expired, no user must be returned.
+     *
+     * @param string $token
+     * @return EditableUserInterface|null
+     */
+    public function findByPasswordChangeToken(string $token): ?EditableUserInterface;
 }

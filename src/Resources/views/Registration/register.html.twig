@@ -2,11 +2,11 @@
 
 
 
-{% block body %}
+{% block content %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <div class="button-group">
-            <button type="submit" class="btn btn-primary">{{ 'private_user.admin.create.submit'|trans }}</button>
+            <button type="submit" class="btn btn-primary">{{ 'private_user.registration.register.submit'|trans }}</button>
         </div>
     {{ form_end(form) }}
 {% endblock %}

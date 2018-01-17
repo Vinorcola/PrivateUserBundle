@@ -1,0 +1,9 @@
+{% extends '@VinorcolaPrivateUser/layout.html.twig' %}
+
+
+
+{% block content %}
+    <p>{{ 'private_user.registration.register.rejectMessage'|trans }}</p>
+
+    <p><a href="{{ path('private_user.registration.requireRegistration') }}">{{ 'private_user.registration.register.rejectRetry'|trans }}</a></p>
+{% endblock %}
