@@ -10,10 +10,12 @@ private_user:
     admin:
         list:
             title: "Liste des utilisateurs"
+            add: "Ajouter un utilisateur"
 
         create:
             title: "Création d’un nouvel utilisateur"
             submit: "Ajouter l’utilisateur"
+            cancel: "Annuler la création"
 
     email:
         registration:

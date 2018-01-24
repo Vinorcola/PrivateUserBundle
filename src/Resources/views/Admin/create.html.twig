@@ -10,6 +10,7 @@
         {{ form_widget(form) }}
         <div class="button-group">
             <button type="submit" class="btn btn-primary">{{ 'private_user.admin.create.submit'|trans }}</button>
+            <a href="{{ path('private_user.admin.list') }}">{{ 'private_user.admin.create.cancel'|trans }}</a>
         </div>
     {{ form_end(form) }}
 {% endblock %}

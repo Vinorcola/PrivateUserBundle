@@ -23,3 +23,9 @@
         </tbody>
     </table>
 {% endblock %}
+
+
+
+{% block private_user_control %}
+    <a href="{{ path('private_user.admin.create') }}">{{ 'private_user.admin.list.add'|trans }}</a>
+{% endblock %}
