@@ -1,0 +1,25 @@
+{% extends '@VinorcolaPrivateUser/layout.html.twig' %}
+
+{% block pageTitle %}{{ 'private_user.admin.list.title'|trans }}{% endblock %}
+{% block title %}{{ 'private_user.admin.list.title'|trans }}{% endblock %}
+
+
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'private_user.user.name'|trans }}</th>
+                <th>{{ 'private_user.user.emailAddress'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.emailAddress }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

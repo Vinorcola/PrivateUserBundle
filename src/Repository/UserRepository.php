@@ -27,7 +27,19 @@ class UserRepository extends Repository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find(string $emailAddress): ?EditableUserInterface
+    public function findAll(): array
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->orderBy('u.firstName', 'ASC')
+            ->addOrderBy('u.lastName', 'ASC')
+            ->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function find(string $emailAddress): ?UserInterface
     {
         return $this
             ->createQueryBuilder('u')

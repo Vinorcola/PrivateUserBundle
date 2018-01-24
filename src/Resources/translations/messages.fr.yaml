@@ -4,9 +4,13 @@ private_user:
         emailAddress: "Adresse e-mail"
         firstName: "Prénom"
         lastName: "Nom"
+        name: "Nom"
         sendInvitation: "Envoyer une invitation par e-mail ?"
 
     admin:
+        list:
+            title: "Liste des utilisateurs"
+
         create:
             title: "Création d’un nouvel utilisateur"
             submit: "Ajouter l’utilisateur"

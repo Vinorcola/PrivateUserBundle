@@ -14,6 +14,13 @@ interface UserRepositoryInterface
     public function add(EditableUserInterface $user): void;
 
     /**
+     * Find all the users.
+     *
+     * @return UserInterface[]
+     */
+    public function findAll(): array;
+
+    /**
      * Find the user identified by the given email address.
      *
      * @param string $emailAddress

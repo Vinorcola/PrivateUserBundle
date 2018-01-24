@@ -8,12 +8,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
+use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
 /**
  * @Route(name="private_user.admin.")
  */
 class AdminController extends Controller
 {
+    /**
+     * @Route("", name="list")
+     * @Method("GET")
+     *
+     * @param UserRepositoryInterface $userRepository
+     * @return Response
+     */
+    public function list(UserRepositoryInterface $userRepository): Response
+    {
+        $users = $userRepository->findAll();
+
+        return $this->render('@VinorcolaPrivateUser/Admin/list.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
     /**
      * @Route("/create", name="create")
      * @Method({"GET", "POST"})
