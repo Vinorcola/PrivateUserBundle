@@ -3,6 +3,7 @@
 namespace Vinorcola\PrivateUserBundle\Repository;
 
 use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
+use Vinorcola\PrivateUserBundle\Model\UserInterface;
 
 interface UserRepositoryInterface
 {

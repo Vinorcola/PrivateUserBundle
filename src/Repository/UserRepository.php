@@ -39,7 +39,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find(string $emailAddress): ?UserInterface
+    public function find(string $emailAddress): ?EditableUserInterface
     {
         return $this
             ->createQueryBuilder('u')
