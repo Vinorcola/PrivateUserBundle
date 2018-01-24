@@ -2,7 +2,7 @@
 
 
 
-{% block body %}
+{% block private_user_body %}
     {% set link = url('private_user.registration.register', { token: user.token }) %}
 
     <h2>{{ 'private_user.email.registration.title'|trans }}</h2>
