@@ -57,7 +57,7 @@ class UserManager implements UserManagerInterface
      */
     public function create(CreateUser $data): UserInterface
     {
-        $user = new User($data->emailAddress, $data->firstName, $data->lastName);
+        $user = new User($data->emailAddress, $data->firstName, $data->lastName, [ 'ROLE_USER' ]);
         $this->repository->add($user);
 
         return $user;
