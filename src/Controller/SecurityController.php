@@ -36,7 +36,7 @@ class SecurityController extends Controller
      * @Route("/login", name="loginCheck")
      * @Method("POST")
      */
-    public function loginCheckAction()
+    public function loginCheck()
     {
         throw new LogicException('Symfony handles itself the login check action. Check your configuration to make sure you setup the good route as "check_path" option.');
     }
@@ -45,7 +45,7 @@ class SecurityController extends Controller
      * @Route("/logout", name="logout")
      * @Method("GET")
      */
-    public function logoutAction()
+    public function logout()
     {
         throw new LogicException('Symfony handles itself the logout action. Check your configuration to make sure you setup the good route as "logout.path" option.');
     }

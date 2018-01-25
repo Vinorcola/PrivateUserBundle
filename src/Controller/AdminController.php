@@ -46,6 +46,8 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $userManager->create($form->getData());
             $this->saveDatabase();
+
+            return $this->redirectToRoute('private_user.admin.list');
         }
 
         return $this->render('@VinorcolaPrivateUser/Admin/create.html.twig', [
