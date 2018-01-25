@@ -17,10 +17,10 @@ class CreateUserType extends AbstractType
         $builder
             ->add('emailAddress', EmailType::class)
             ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('sendInvitation', CheckboxType::class, [
-                'required' => false,
-            ]);
+            ->add('lastName', TextType::class);
+            // ->add('sendInvitation', CheckboxType::class, [
+            //     'required' => false,
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
