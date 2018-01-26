@@ -10,6 +10,21 @@ use Symfony\Component\Translation\TranslatorInterface;
 abstract class Controller extends BaseController
 {
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * Controller constructor.
+     *
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
+    /**
      * Add a form error by translating the message key using the translation parameters.
      *
      * @param FormInterface $form
@@ -18,10 +33,8 @@ abstract class Controller extends BaseController
      */
     protected function addFormError(FormInterface $form, string $message, array $translationParameters = [])
     {
-        /** @var TranslatorInterface $translator */
-        $translator = $this->get(TranslatorInterface::class);
         $form->addError(new FormError(
-            $translator->trans(
+            $this->translator->trans(
                 $message,
                 $translationParameters,
                 'validators'
