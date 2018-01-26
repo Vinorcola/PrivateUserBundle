@@ -43,6 +43,7 @@ private_user:
 
     security:
         login:
+            title: "Connexion"
             emailAddress: "Votre adresse e-mail"
             password: "Votre mot de passe"
             submit: "Se connecter"
