@@ -25,19 +25,23 @@ private_user:
 
     registration:
         requireRegistration:
+            title: "Créer mon compte"
             submit: "Créer mon compte"
             unknownUser: "Utilisateur inconnu."
             alreadyRegistered: "Un compte utilisateur existe déjà pour cette adresse e-mail."
 
         confirmRegistrationRequest:
+            title: "Créer mon compte"
             message: "Un e-mail vient d’être envoyé à l’adresse %emailAddress%. Cet e-mail contient un lien qui vous permettra de choisir le mot de passe de votre compte."
 
         register:
+            title: "Échec de la création du compte"
             rejectMessage: "Lien invalide. Merci de recommencer la procédure."
             rejectRetry: "Recommencer la procédure."
             submit: "Définir mon mot de passe"
 
         confirmRegistration:
+            title: "Compte créé"
             message: "Votre compte a été créé avec succès."
             start: "Cliquez-ici pour continuer"
 
