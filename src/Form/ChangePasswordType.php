@@ -15,7 +15,13 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
+                'type'           => PasswordType::class,
+                'first_options'  => [
+                    'label' => 'private_user.user.password',
+                ],
+                'second_options' => [
+                    'label' => 'private_user.user.repeatPassword',
+                ],
             ]);
     }
 
