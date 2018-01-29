@@ -151,6 +151,7 @@ class RegistrationController extends Controller
             $userManager->updatePassword($user, $form->getData());
             $userManager->logUserIn($user);
             $this->saveDatabase();
+            $session->remove(self::USER_TO_REGISTER_SESSION_KEY);
 
             return $this->redirectToRoute('private_user.registration.confirmRegistration');
         }
