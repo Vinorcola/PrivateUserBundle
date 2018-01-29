@@ -5,6 +5,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Vinorcola\PrivateUserBundle\Data\FindUser;
 use Vinorcola\PrivateUserBundle\Form\ChangePasswordType;
 use Vinorcola\PrivateUserBundle\Form\FindUserType;
@@ -17,6 +18,11 @@ use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
  */
 class RegistrationController extends Controller
 {
+    /**
+     * The key used in session to remember the user currently registering.
+     */
+    private const USER_TO_REGISTER_SESSION_KEY = 'private_user.user_email_address';
+
     /**
      * @Route("/require-registration", name="requireRegistration")
      * @Method({"GET", "POST"})
@@ -79,24 +85,64 @@ class RegistrationController extends Controller
      * @Route("/register/{token}", name="register", requirements={
      *     "token": "[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
      * })
-     * @Method({"GET", "POST"})
+     * @Method("GET")
      *
-     * @param Request                 $request
+     * @param SessionInterface        $session
      * @param string                  $token
      * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
      * @return Response
      */
     public function register(
-        Request $request,
+        SessionInterface $session,
         string $token,
-        UserRepositoryInterface $repository,
-        UserManagerInterface $userManager
+        UserRepositoryInterface $repository
     ): Response {
 
         $user = $repository->findByRegistrationToken($token);
         if (!$user) {
-            return $this->render('@VinorcolaPrivateUser/Registration/rejectRegistration.html.twig');
+            return $this->redirectToRoute('private_user.registration.rejectRegistration');
+        }
+
+        $session->set(self::USER_TO_REGISTER_SESSION_KEY, $user->getEmailAddress());
+
+        return $this->redirectToRoute('private_user.registration.definePassword');
+    }
+
+    /**
+     * @Route("/register/reject", name="rejectRegistration")
+     * @Method("GET")
+     *
+     * @return Response
+     */
+    public function rejectRegistration(): Response
+    {
+        return $this->render('@VinorcolaPrivateUser/Registration/rejectRegistration.html.twig');
+    }
+
+    /**
+     * @Route("/register/define-password", name="definePassword")
+     * @Method({"GET", "POST"})
+     *
+     * @param SessionInterface        $session
+     * @param Request                 $request
+     * @param UserRepositoryInterface $repository
+     * @param UserManagerInterface    $userManager
+     * @return Response
+     */
+    public function definePassword(
+        SessionInterface $session,
+        Request $request,
+        UserRepositoryInterface $repository,
+        UserManagerInterface $userManager
+    ): Response {
+
+        if (!$session->has(self::USER_TO_REGISTER_SESSION_KEY)) {
+            return $this->redirectToRoute('private_user.registration.rejectRegistration');
+        }
+
+        $user = $repository->find($session->get(self::USER_TO_REGISTER_SESSION_KEY));
+        if (!$user) {
+            return $this->redirectToRoute('private_user.registration.rejectRegistration');
         }
 
         $form = $this->createForm(ChangePasswordType::class);
@@ -109,7 +155,7 @@ class RegistrationController extends Controller
             return $this->redirectToRoute('private_user.registration.confirmRegistration');
         }
 
-        return $this->render('@VinorcolaPrivateUser/Registration/register.html.twig', [
+        return $this->render('@VinorcolaPrivateUser/Registration/definePassword.html.twig', [
             'form' => $form->createView(),
         ]);
     }

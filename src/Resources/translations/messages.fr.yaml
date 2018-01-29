@@ -34,11 +34,15 @@ private_user:
             title: "Créer mon compte"
             message: "Un e-mail vient d’être envoyé à l’adresse %emailAddress%. Cet e-mail contient un lien qui vous permettra de choisir le mot de passe de votre compte."
 
-        register:
-            title: "Échec de la création du compte"
-            rejectMessage: "Lien invalide. Merci de recommencer la procédure."
-            rejectRetry: "Recommencer la procédure."
+        definePassword:
+            title: "Créer mon compte"
+            message: "Afin de compléter la création de votre compte, veuillez choisir un mot de passe."
             submit: "Définir mon mot de passe"
+
+        rejectRegistration:
+            title: "Échec de la création du compte"
+            message: "Lien invalide. Merci de recommencer la procédure."
+            retry: "Recommencer la procédure."
 
         confirmRegistration:
             title: "Compte créé"
