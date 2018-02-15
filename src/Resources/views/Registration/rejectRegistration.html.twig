@@ -3,7 +3,7 @@
 
 
 {% block private_user_body %}
-    <p>{{ 'private_user.registration.register.rejectMessage'|trans }}</p>
+    <p>{{ 'private_user.registration.rejectRegistration.message'|trans }}</p>
 
-    <p><a href="{{ path('private_user.registration.requireRegistration') }}">{{ 'private_user.registration.register.rejectRetry'|trans }}</a></p>
+    <p><a href="{{ path('private_user.registration.requireRegistration') }}">{{ 'private_user.registration.rejectRegistration.retry'|trans }}</a></p>
 {% endblock %}

@@ -26,10 +26,41 @@ private_user:
             cancel: "Annuler les modifications"
 
     email:
+        forgottenPassword:
+            title: "Création de votre compte"
+            greeting: "Bonjour %name%,"
+            content: "Veuillez cliquer sur le lien ci-dessous pour choisir votre mot de passe et créer votre compte :"
+
         registration:
             title: "Création de votre compte"
             greeting: "Bonjour %name%,"
             content: "Veuillez cliquer sur le lien ci-dessous pour choisir votre mot de passe et créer votre compte :"
+
+    forgottenPassword:
+        requirePasswordChange:
+            title: "Regénérer un nouveau mot de passe"
+            submit: "Regénérer un nouveau mot de passe"
+            unknownUser: "Utilisateur inconnu."
+            notRegistered: "Ce compte utilisateur n’existe pas. Veuillez le créer avec la fonctionnalité \"Créer mon compte\"."
+
+        confirmPasswordChangeRequest:
+            title: "Regénérer un nouveau mot de passe"
+            message: "Un e-mail vient d’être envoyé à l’adresse %emailAddress%. Cet e-mail contient un lien qui vous permettra de choisir votre nouveau mot de passe."
+
+        definePassword:
+            title: "Regénérer un nouveau mot de passe"
+            message: "Afin de compléter la procédure, veuillez choisir un mot de passe."
+            submit: "Changer mon mot de passe"
+
+        rejectPasswordChange:
+            title: "Échec du changement de mot de passe"
+            message: "Lien invalide. Merci de recommencer la procédure."
+            retry: "Recommencer la procédure."
+
+        confirmPasswordChange:
+            title: "Mot de passe mis à jour"
+            message: "Votre mot de passe a été changé avec succès."
+            start: "Cliquez-ici pour continuer"
 
     registration:
         requireRegistration:

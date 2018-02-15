@@ -63,4 +63,23 @@ class EmailModel
 
         $this->mailer->send($email);
     }
+
+    /**
+     * @param UserInterface $user
+     */
+    public function sendPasswordChangeEmail(UserInterface $user): void
+    {
+        $email = new Swift_Message($this->translator->trans('private_user.email.forgottenPassword.title'));
+        $email
+            ->setFrom($this->fromAddress)
+            ->setTo($user->getEmailAddress())
+            ->setBody(
+                $this->twigEnvironment->render('@VinorcolaPrivateUser/Email/forgottenPassword.html.twig', [
+                    'user' => $user,
+                ]),
+                'text/html'
+            );
+
+        $this->mailer->send($email);
+    }
 }
