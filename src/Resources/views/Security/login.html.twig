@@ -28,7 +28,7 @@
         </form>
 
         <p>
-            <a href="#">{{ 'private_user.security.login.passwordForgotten'|trans }}</a>
+            <a href="{{ path('private_user.forgottenPassword.requirePasswordChange') }}">{{ 'private_user.security.login.passwordForgotten'|trans }}</a>
             <a href="{{ path('private_user.registration.requireRegistration') }}">{{ 'private_user.security.login.createAccount'|trans }}</a>
         </p>
     </div>
