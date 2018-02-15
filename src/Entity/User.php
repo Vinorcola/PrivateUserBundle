@@ -105,6 +105,15 @@ class User extends BaseUser
     }
 
     /**
+     * @param string $emailAddress
+     */
+    public function setEmailAddress(string $emailAddress): void
+    {
+        $this->emailAddress = $emailAddress;
+        $this->uniqueEmailAddress = mb_strtolower($emailAddress);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setName(string $firstName, string $lastName): void

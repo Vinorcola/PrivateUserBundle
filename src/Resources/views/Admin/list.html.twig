@@ -6,18 +6,20 @@
 
 
 {% block private_user_body %}
-    <table>
+    <table id="user-list">
         <thead>
             <tr>
                 <th>{{ 'private_user.user.name'|trans }}</th>
                 <th>{{ 'private_user.user.emailAddress'|trans }}</th>
+                <th>{{ 'private_user.user.enabled'|trans }}</th>
             </tr>
         </thead>
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ user.displayName }}</td>
+                    <td><a href="{{ path('private_user.admin.edit', { userEmailAddress: user.emailAddress }) }}">{{ user.displayName }}</a></td>
                     <td>{{ user.emailAddress }}</td>
+                    <td>{% if user.enabled %}✔{% else %}✖{% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -28,4 +30,36 @@
 
 {% block private_user_control %}
     <a href="{{ path('private_user.admin.create') }}">{{ 'private_user.admin.list.add'|trans }}</a>
+{% endblock %}
+
+
+
+{% block stylesheets %}
+    <style>
+        #user-list tbody tr {
+            cursor: pointer;
+        }
+
+        #user-list a {
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script>
+        (function() {
+            function handleLineClick() {
+                {# Click on the link in the first cell.#}
+                this.firstElementChild.firstElementChild.click()
+            }
+
+            Array.prototype.slice.call(document.querySelectorAll("#user-list tbody tr"))
+                .forEach(function(tr) {
+                    tr.addEventListener("click", handleLineClick)
+                })
+        })()
+    </script>
 {% endblock %}

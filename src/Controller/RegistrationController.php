@@ -83,7 +83,7 @@ class RegistrationController extends Controller
 
     /**
      * @Route("/register/{token}", name="register", requirements={
-     *     "token": "[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
+     *     "token": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
      * })
      * @Method("GET")
      *

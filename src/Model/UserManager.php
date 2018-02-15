@@ -68,6 +68,7 @@ class UserManager implements UserManagerInterface
      */
     public function update(EditableUserInterface $user, EditUser $data): void
     {
+        $user->setEmailAddress($data->emailAddress);
         $user->setName($data->firstName, $data->lastName);
         $user->setRoles($data->roles);
         $data->enabled ? $user->enable() : $user->disable();

@@ -7,6 +7,13 @@ use DateTime;
 interface EditableUserInterface extends UserInterface
 {
     /**
+     * Change the user's email address.
+     *
+     * @param string $emailAddress
+     */
+    public function setEmailAddress(string $emailAddress): void;
+
+    /**
      * Change the user's first and last names.
      *
      * @param string $firstName

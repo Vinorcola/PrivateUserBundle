@@ -8,6 +8,7 @@ private_user:
         sendInvitation: "Envoyer une invitation par e-mail ?"
         password: "Mot de passe"
         repeatPassword: "Répétez le mot de passe"
+        enabled: "Autorisé à se connecter ?"
 
     admin:
         list:
@@ -18,6 +19,11 @@ private_user:
             title: "Création d’un nouvel utilisateur"
             submit: "Ajouter l’utilisateur"
             cancel: "Annuler la création"
+
+        edit:
+            title: "Modification des données de %user%"
+            submit: "Modifier les données"
+            cancel: "Annuler les modifications"
 
     email:
         registration:
