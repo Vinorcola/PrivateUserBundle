@@ -2,11 +2,10 @@
 
 namespace Vinorcola\PrivateUserBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Form\EditUserType;
@@ -19,8 +18,7 @@ use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 class AdminController extends Controller
 {
     /**
-     * @Route("", name="list")
-     * @Method("GET")
+     * @Route("", methods={"GET"}, name="list")
      *
      * @param UserRepositoryInterface $userRepository
      * @return Response
@@ -35,8 +33,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/create", name="create")
-     * @Method({"GET", "POST"})
+     * @Route("/create", methods={"GET", "POST"}, name="create")
      *
      * @param Request              $request
      * @param UserManagerInterface $userManager
@@ -59,8 +56,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/edit/{userEmailAddress}", name="edit")
-     * @Method({"GET", "POST"})
+     * @Route("/edit/{userEmailAddress}", methods={"GET", "POST"}, name="edit")
      *
      * @param Request                 $request
      * @param string                  $userEmailAddress

@@ -3,9 +3,8 @@
 namespace Vinorcola\PrivateUserBundle\Controller;
 
 use LogicException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -14,8 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
     /**
-     * @Route("/login", name="login")
-     * @Method("GET")
+     * @Route("/login", methods={"GET"}, name="login")
      *
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
@@ -33,8 +31,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/login", name="loginCheck")
-     * @Method("POST")
+     * @Route("/login", methods={"POST"}, name="loginCheck")
      */
     public function loginCheck()
     {
@@ -42,8 +39,7 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/logout", name="logout")
-     * @Method("GET")
+     * @Route("/logout", methods={"GET"}, name="logout")
      */
     public function logout()
     {

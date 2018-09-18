@@ -15,14 +15,15 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('password', RepeatedType::class, [
-                'type'           => PasswordType::class,
-                'error_bubbling' => true,
-                'first_options'  => [
+                'type'            => PasswordType::class,
+                'error_bubbling'  => true,
+                'first_options'   => [
                     'label' => 'private_user.user.password',
                 ],
-                'second_options' => [
+                'second_options'  => [
                     'label' => 'private_user.user.repeatPassword',
                 ],
+                'invalid_message' => 'private_user.passwords_not_matching',
             ]);
     }
 

@@ -24,8 +24,7 @@ class RegistrationController extends Controller
     private const USER_TO_REGISTER_SESSION_KEY = 'private_user.user_email_address';
 
     /**
-     * @Route("/require-registration", name="requireRegistration")
-     * @Method({"GET", "POST"})
+     * @Route("/require-registration", methods={"GET", "POST"}, name="requireRegistration")
      *
      * @param Request                 $request
      * @param UserRepositoryInterface $repository
@@ -68,8 +67,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Route("/require-registration/confirm/{emailAddress}", name="confirmRegistrationRequest")
-     * @Method("GET")
+     * @Route("/require-registration/confirm/{emailAddress}", methods={"GET"}, name="confirmRegistrationRequest")
      *
      * @param string $emailAddress
      * @return Response
@@ -82,10 +80,9 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Route("/register/{token}", name="register", requirements={
+     * @Route("/register/{token}", methods={"GET"}, name="register", requirements={
      *     "token": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
      * })
-     * @Method("GET")
      *
      * @param SessionInterface        $session
      * @param string                  $token
@@ -109,8 +106,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Route("/register/reject", name="rejectRegistration")
-     * @Method("GET")
+     * @Route("/register/reject", methods={"GET"}, name="rejectRegistration")
      *
      * @return Response
      */
@@ -120,8 +116,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Route("/register/define-password", name="definePassword")
-     * @Method({"GET", "POST"})
+     * @Route("/register/define-password", methods={"GET", "POST"}, name="definePassword")
      *
      * @param SessionInterface        $session
      * @param Request                 $request
@@ -162,8 +157,7 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @Route("/register/confirm", name="confirmRegistration")
-     * @Method("GET")
+     * @Route("/register/confirm", methods={"GET"}, name="confirmRegistration")
      *
      * @return Response
      */

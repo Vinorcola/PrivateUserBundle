@@ -1,0 +1,2 @@
+private_user:
+    passwords_not_matching: "Les mots de passe ne correspondent pas."
