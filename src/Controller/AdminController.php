@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Form\EditUserType;
+use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
@@ -21,11 +22,16 @@ class AdminController extends Controller
      * @Route("", methods={"GET"}, name="list")
      *
      * @param UserRepositoryInterface $userRepository
+     * @param UserManagerInterface    $userManager
      * @return Response
      */
-    public function list(UserRepositoryInterface $userRepository): Response
+    public function list(UserRepositoryInterface $userRepository, UserManagerInterface $userManager): Response
     {
         $users = $userRepository->findAll();
+        foreach ($users as $user) {
+            /** @var EditableUserInterface $user */
+            $user->setType($userManager->getUserType($user));
+        }
 
         return $this->render('@VinorcolaPrivateUser/Admin/list.html.twig', [
             'users' => $users,
@@ -75,6 +81,7 @@ class AdminController extends Controller
         if (!$user) {
             throw new NotFoundHttpException();
         }
+        $user->setType($userManager->getUserType($user));
 
         $form = $this->createForm(EditUserType::class, EditUser::FromUser($user));
         $form->handleRequest($request);

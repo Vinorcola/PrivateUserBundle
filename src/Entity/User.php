@@ -59,6 +59,13 @@ class User extends BaseUser
     /**
      * @var string|null
      *
+     * Note: Not save in database since is it processed from roles.
+     */
+    private $type;
+
+    /**
+     * @var string|null
+     *
      * @Mapping\Column(type="string", length=60, nullable=true)
      */
     private $password;
@@ -131,6 +138,14 @@ class User extends BaseUser
     }
 
     /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function setPassword(string $password)
@@ -180,6 +195,18 @@ class User extends BaseUser
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        if ($this->type === null) {
+            throw new \LogicException('User type has not been set.');
+        }
+
+        return $this->type;
     }
 
     /**

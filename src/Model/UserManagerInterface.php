@@ -9,6 +9,14 @@ use Vinorcola\PrivateUserBundle\Data\EditUser;
 interface UserManagerInterface
 {
     /**
+     * Get the type of user.
+     *
+     * @param UserInterface $user
+     * @return string|null
+     */
+    public function getUserType(UserInterface $user): ?string;
+
+    /**
      * Create a new user using data in the data.
      *
      * @param CreateUser $data

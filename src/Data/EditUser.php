@@ -9,6 +9,11 @@ class EditUser
     /**
      * @var string
      */
+    public $type;
+
+    /**
+     * @var string
+     */
     public $emailAddress;
 
     /**
@@ -22,11 +27,6 @@ class EditUser
     public $lastName;
 
     /**
-     * @var string[]
-     */
-    public $roles;
-
-    /**
      * @var bool
      */
     public $enabled;
@@ -38,10 +38,10 @@ class EditUser
     public static function FromUser(UserInterface $user): self
     {
         $dto = new self;
+        $dto->type = $user->getType();
         $dto->emailAddress = $user->getEmailAddress();
         $dto->firstName = $user->getFirstName();
         $dto->lastName = $user->getLastName();
-        $dto->roles = $user->getRoles();
         $dto->enabled = $user->isEnabled();
 
         return $dto;

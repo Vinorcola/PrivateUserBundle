@@ -36,20 +36,52 @@ class UserManager implements UserManagerInterface
     private $tokenStorage;
 
     /**
+     * @var Config
+     */
+    private $config;
+
+    /**
      * UserManager constructor.
      *
      * @param UserRepositoryInterface      $repository
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param TokenStorageInterface        $tokenStorage
+     * @param Config                       $config
      */
     public function __construct(
         UserRepositoryInterface $repository,
         UserPasswordEncoderInterface $passwordEncoder,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        Config $config
     ) {
         $this->repository = $repository;
         $this->passwordEncoder = $passwordEncoder;
         $this->tokenStorage = $tokenStorage;
+        $this->config = $config;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserType(UserInterface $user): ?string
+    {
+        // NOTE: We sort roles in order to compare them easily.
+        $roles = $this->getComparableRoles($user->getRoles());
+        foreach ($this->config->getUserTypes() as $userType) {
+            if ($roles === $this->getComparableRoles($this->config->getRoles($userType))) {
+                return $userType;
+            }
+        }
+
+        return null;
+    }
+
+    private function getComparableRoles(array $roles): string
+    {
+        // Sort and serialize.
+        sort($roles);
+
+        return serialize($roles);
     }
 
     /**
@@ -57,7 +89,7 @@ class UserManager implements UserManagerInterface
      */
     public function create(CreateUser $data): UserInterface
     {
-        $user = new User($data->emailAddress, $data->firstName, $data->lastName, [ 'ROLE_USER' ]);
+        $user = new User($data->emailAddress, $data->firstName, $data->lastName, $this->config->getRoles($data->type));
         $this->repository->add($user);
 
         return $user;
@@ -70,7 +102,8 @@ class UserManager implements UserManagerInterface
     {
         $user->setEmailAddress($data->emailAddress);
         $user->setName($data->firstName, $data->lastName);
-        $user->setRoles($data->roles);
+        $user->setType($data->type);
+        $user->setRoles($this->config->getRoles($data->type));
         $data->enabled ? $user->enable() : $user->disable();
     }
 

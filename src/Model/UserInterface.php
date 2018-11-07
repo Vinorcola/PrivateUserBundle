@@ -7,6 +7,13 @@ use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 interface UserInterface extends BaseUserInterface
 {
     /**
+     * Returns the user type.
+     *
+     * @return string
+     */
+    public function getType(): string;
+
+    /**
      * Returns the email address used to authenticate the user.
      *
      * @return string The email address

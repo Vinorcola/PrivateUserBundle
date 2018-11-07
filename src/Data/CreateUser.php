@@ -7,6 +7,11 @@ class CreateUser
     /**
      * @var string
      */
+    public $type;
+
+    /**
+     * @var string
+     */
     public $emailAddress;
 
     /**

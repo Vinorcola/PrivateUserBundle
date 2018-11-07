@@ -8,7 +8,11 @@ private_user:
         sendInvitation: "Envoyer une invitation par e-mail ?"
         password: "Mot de passe"
         repeatPassword: "Répétez le mot de passe"
+        type: "Type de compte"
         enabled: "Autorisé à se connecter ?"
+
+    userType:
+        user: "Utilisateur simple"
 
     admin:
         list:

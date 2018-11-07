@@ -11,6 +11,7 @@
             <tr>
                 <th>{{ 'private_user.user.name'|trans }}</th>
                 <th>{{ 'private_user.user.emailAddress'|trans }}</th>
+                <th>{{ 'private_user.user.type'|trans }}</th>
                 <th>{{ 'private_user.user.enabled'|trans }}</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <tr>
                     <td><a href="{{ path('private_user.admin.edit', { userEmailAddress: user.emailAddress }) }}">{{ user.displayName }}</a></td>
                     <td>{{ user.emailAddress }}</td>
+                    <td>{{ ('private_user.userType.' ~ user.type)|trans }}</td>
                     <td>{% if user.enabled %}✔{% else %}✖{% endif %}</td>
                 </tr>
             {% endfor %}
