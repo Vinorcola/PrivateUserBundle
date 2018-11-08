@@ -63,7 +63,7 @@ class UserManager implements UserManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getUserType(UserInterface $user): ?string
+    public function getUserType(UserInterface $user): string
     {
         // NOTE: We sort roles in order to compare them easily.
         $roles = $this->getComparableRoles($user->getRoles());
@@ -73,7 +73,7 @@ class UserManager implements UserManagerInterface
             }
         }
 
-        return null;
+        return self::UNKNOWN_USER_TYPE;
     }
 
     private function getComparableRoles(array $roles): string
