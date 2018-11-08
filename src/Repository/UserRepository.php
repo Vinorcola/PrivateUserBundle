@@ -5,6 +5,7 @@ namespace Vinorcola\PrivateUserBundle\Repository;
 use DateTime;
 use Vinorcola\PrivateUserBundle\Entity\User;
 use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
+use Vinorcola\PrivateUserBundle\Model\UserInterface;
 
 class UserRepository extends Repository implements UserRepositoryInterface
 {
@@ -51,6 +52,19 @@ class UserRepository extends Repository implements UserRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function findEnabled(string $emailAddress): ?UserInterface
+    {
+        return $this
+            ->createQueryBuilder('u')
+            ->where('u.emailAddress = :emailAddress')
+            ->andWhere('u.enabled = TRUE')
+            ->setParameter('emailAddress', $emailAddress)
+            ->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findByRegistrationToken(string $token): ?EditableUserInterface
     {
         return $this
@@ -58,6 +72,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
             ->where('u.token = :token')
             ->andWhere('u.tokenExpirationDate >= :now')
             ->andWhere('u.password IS NULL')
+            ->andWhere('u.enabled = TRUE')
             ->setParameter('token', $token)
             ->setParameter('now', new DateTime())
             ->getQuery()->getOneOrNullResult();
@@ -73,6 +88,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
             ->where('u.token = :token')
             ->andWhere('u.tokenExpirationDate >= :now')
             ->andWhere('u.password IS NOT NULL')
+            ->andWhere('u.enabled = TRUE')
             ->setParameter('token', $token)
             ->setParameter('now', new DateTime())
             ->getQuery()->getOneOrNullResult();

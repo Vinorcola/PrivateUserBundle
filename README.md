@@ -1,6 +1,6 @@
 # Private User bundle
 
-A Symfony bundle to provider user management for private applications.
+A Symfony bundle to provide user management for private applications.
 
 If you are building an internal application where you do not want anyone to be able to register, this bundle is for you.
 

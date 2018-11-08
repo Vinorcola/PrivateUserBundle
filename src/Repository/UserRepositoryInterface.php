@@ -30,6 +30,14 @@ interface UserRepositoryInterface
     public function find(string $emailAddress): ?EditableUserInterface;
 
     /**
+     * Find the enabled user identified by the given email address.
+     *
+     * @param string $emailAddress
+     * @return UserInterface|null
+     */
+    public function findEnabled(string $emailAddress): ?UserInterface;
+
+    /**
      * Find the user identified by the given registration token.
      *
      * Note that function must take care of token expiration date. If token is expired, no user must be returned.
