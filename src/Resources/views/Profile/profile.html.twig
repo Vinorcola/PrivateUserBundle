@@ -1,0 +1,31 @@
+{% extends '@VinorcolaPrivateUser/profileLayout.html.twig' %}
+
+
+
+{% block private_user_body %}
+    <h1>{{ user.displayName }}</h1>
+
+    <table class="table table-sm">
+        <tbody>
+            <tr>
+                <th>{{ 'private_user.profile.profile.firstName'|trans }}</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'private_user.profile.profile.lastName'|trans }}</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'private_user.profile.profile.emailAddress'|trans }}</th>
+                <td>{{ user.emailAddress }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ form_start(changePasswordForm) }}
+        {{ form_widget(changePasswordForm) }}
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">{{ 'private_user.profile.changePassword.submit'|trans }}</button>
+        </div>
+    {{ form_end(changePasswordForm) }}
+{% endblock %}

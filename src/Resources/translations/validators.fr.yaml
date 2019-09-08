@@ -1,2 +1,3 @@
 private_user:
+    invalid_password: "Mot de passe actuel invalide."
     passwords_not_matching: "Les mots de passe ne correspondent pas."

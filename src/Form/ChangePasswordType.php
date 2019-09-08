@@ -13,15 +13,22 @@ class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['require_current_password']) {
+            $builder
+                ->add('currentPassword', PasswordType::class, [
+                    'label' => 'private_user.user.currentPassword',
+                ]);
+        }
+
         $builder
-            ->add('password', RepeatedType::class, [
+            ->add('newPassword', RepeatedType::class, [
                 'type'            => PasswordType::class,
                 'error_bubbling'  => true,
                 'first_options'   => [
-                    'label' => 'private_user.user.password',
+                    'label' => 'private_user.user.newPassword',
                 ],
                 'second_options'  => [
-                    'label' => 'private_user.user.repeatPassword',
+                    'label' => 'private_user.user.repeatNewPassword',
                 ],
                 'invalid_message' => 'private_user.passwords_not_matching',
             ]);
@@ -30,5 +37,7 @@ class ChangePasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefault('data_class', ChangePassword::class);
+        $resolver->setDefault('require_current_password', false);
+        $resolver->setAllowedTypes('require_current_password', 'bool');
     }
 }

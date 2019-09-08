@@ -112,7 +112,7 @@ class UserManager implements UserManagerInterface
      */
     public function updatePassword(EditableUserInterface $user, ChangePassword $data): void
     {
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $data->password));
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $data->newPassword));
         $user->eraseToken();
     }
 
