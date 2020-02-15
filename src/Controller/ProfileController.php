@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 use Vinorcola\PrivateUserBundle\Form\ChangePasswordType;
 use Vinorcola\PrivateUserBundle\Model\UserInterface;
