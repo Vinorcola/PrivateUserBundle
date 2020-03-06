@@ -4,7 +4,7 @@ namespace Vinorcola\PrivateUserBundle\Model;
 
 use Swift_Mailer;
 use Swift_Message;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class EmailModel
