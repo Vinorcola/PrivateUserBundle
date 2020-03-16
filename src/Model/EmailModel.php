@@ -2,20 +2,20 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
-use Swift_Mailer;
-use Swift_Message;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
+use Twig\Environment as TemplateEngine;
 
 class EmailModel
 {
     /**
-     * @var Swift_Mailer
+     * @var MailerInterface
      */
     private $mailer;
 
     /**
-     * @var Environment
+     * @var TemplateEngine
      */
     private $twigEnvironment;
 
@@ -32,13 +32,17 @@ class EmailModel
     /**
      * EmailModel constructor.
      *
-     * @param Swift_Mailer        $mailer
-     * @param Environment         $twigEnvironment
+     * @param MailerInterface     $mailer
+     * @param TemplateEngine      $twigEnvironment
      * @param TranslatorInterface $translator
      * @param string              $fromAddress
      */
-    public function __construct(Swift_Mailer $mailer, Environment $twigEnvironment, TranslatorInterface $translator, string $fromAddress)
-    {
+    public function __construct(
+        MailerInterface $mailer,
+        TemplateEngine $twigEnvironment,
+        TranslatorInterface $translator,
+        string $fromAddress
+    ) {
         $this->mailer = $mailer;
         $this->twigEnvironment = $twigEnvironment;
         $this->translator = $translator;
@@ -50,16 +54,15 @@ class EmailModel
      */
     public function sendRegistrationEmail(UserInterface $user): void
     {
-        $email = new Swift_Message($this->translator->trans('private_user.email.registration.title'));
-        $email
-            ->setFrom($this->fromAddress)
-            ->setTo($user->getEmailAddress())
-            ->setBody(
-                $this->twigEnvironment->render('@VinorcolaPrivateUser/Email/registration.html.twig', [
-                    'user' => $user,
-                ]),
-                'text/html'
-            );
+        $email = new Email();
+        $email->subject($this->translator->trans('private_user.email.registration.title'));
+        $email->from($this->fromAddress);
+        $email->to($user->getEmailAddress());
+        $email->html(
+            $this->twigEnvironment->render('@VinorcolaPrivateUser/Email/registration.html.twig', [
+                'user' => $user,
+            ])
+        );
 
         $this->mailer->send($email);
     }
@@ -69,16 +72,15 @@ class EmailModel
      */
     public function sendPasswordChangeEmail(UserInterface $user): void
     {
-        $email = new Swift_Message($this->translator->trans('private_user.email.forgottenPassword.title'));
-        $email
-            ->setFrom($this->fromAddress)
-            ->setTo($user->getEmailAddress())
-            ->setBody(
-                $this->twigEnvironment->render('@VinorcolaPrivateUser/Email/forgottenPassword.html.twig', [
-                    'user' => $user,
-                ]),
-                'text/html'
-            );
+        $email = new Email();
+        $email->subject($this->translator->trans('private_user.email.forgottenPassword.title'));
+        $email->from($this->fromAddress);
+        $email->to($user->getEmailAddress());
+        $email->html(
+            $this->twigEnvironment->render('@VinorcolaPrivateUser/Email/forgottenPassword.html.twig', [
+                'user' => $user,
+            ])
+        );
 
         $this->mailer->send($email);
     }

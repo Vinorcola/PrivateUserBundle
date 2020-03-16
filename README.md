@@ -27,6 +27,24 @@ vinorcola_private_user:
 
 By default (if no config is set), the only type available will be "user" with "ROLE_USER".
 
+Because the bundle cannot configure the `security`, you have to add another config file with the following content:
+
+```yaml
+# config/packages/private_user.yaml
+
+security:
+    encoders:
+        Vinorcola\PrivateUserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        main:
+            id: Vinorcola\PrivateUserBundle\Security\UserProvider
+```
+
+Note that you can set the password encoder you want.
+
 ## Customize
 
 The bundle provide simple template files, but it is recommended to copy them in order to customize them. Simply copy the folder `vendor/vinorcola/private-user-bundle/src/Resources/views` in `templates/bundles/VinorcolaPrivateUserBundle` and start modifying them.

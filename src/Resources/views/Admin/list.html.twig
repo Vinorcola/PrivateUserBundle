@@ -12,16 +12,29 @@
                 <th>{{ 'private_user.user.name'|trans }}</th>
                 <th>{{ 'private_user.user.emailAddress'|trans }}</th>
                 <th>{{ 'private_user.user.type'|trans }}</th>
+                <th>{{ 'private_user.user.activated'|trans }}</th>
                 <th>{{ 'private_user.user.enabled'|trans }}</th>
+                <th>{{ 'private_user.admin.list.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td><a href="{{ path('private_user.admin.edit', { userEmailAddress: user.emailAddress }) }}">{{ user.displayName }}</a></td>
+                    <td>{{ user.displayName }}</td>
                     <td>{{ user.emailAddress }}</td>
                     <td>{{ ('private_user.userType.' ~ user.type)|trans }}</td>
+                    <td>{% if user.activated %}✔{% else %}✖{% endif %}</td>
                     <td>{% if user.enabled %}✔{% else %}✖{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li><a href="{{ path('private_user.admin.edit', { userEmailAddress: user.emailAddress }) }}">{{ 'private_user.admin.list.edit'|trans }}</a></li>
+                            {% if user.activated %}
+                                <li><a href="{{ path('private_user.admin.generateForgottenPasswordLink', { userEmailAddress: user.emailAddress }) }}">{{ 'private_user.admin.list.generateForgottenPasswordLink'|trans }}</a></li>
+                            {% else %}
+                                <li><a href="{{ path('private_user.admin.generateActivationLink', { userEmailAddress: user.emailAddress }) }}">{{ 'private_user.admin.list.generateActivationLink'|trans }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -54,7 +67,7 @@
     <script>
         (function() {
             function handleLineClick() {
-                {# Click on the link in the first cell.#}
+                {# Click on the link in the first cell. #}
                 this.firstElementChild.firstElementChild.click()
             }
 

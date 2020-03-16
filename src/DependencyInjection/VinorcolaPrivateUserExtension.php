@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vinorcola\PrivateUserBundle\Model\Config;
+use Vinorcola\PrivateUserBundle\Model\EmailModel;
 
 class VinorcolaPrivateUserExtension extends Extension
 {
@@ -18,5 +19,12 @@ class VinorcolaPrivateUserExtension extends Extension
         $loader->load('services.yaml');
 
         $container->getDefinition(Config::class)->setArgument('$config', $processedConfig);
+        $this->injectConfigInServices($container, $processedConfig);
+    }
+
+    private function injectConfigInServices(ContainerBuilder $container, array $config): void
+    {
+        $emailModel = $container->getDefinition(EmailModel::class);
+        $emailModel->setArgument('$fromAddress', $config['sending_email_address']);
     }
 }

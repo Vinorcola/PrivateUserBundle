@@ -10,6 +10,7 @@ private_user:
         newPassword: "Nouveau mot de passe"
         repeatNewPassword: "Répétez le mot de passe"
         type: "Type de compte"
+        activated: "Compte activé ?"
         enabled: "Autorisé à se connecter ?"
 
     userType:
@@ -19,7 +20,11 @@ private_user:
     admin:
         list:
             title: "Liste des utilisateurs"
+            actions: "Actions"
             add: "Ajouter un utilisateur"
+            edit: "Modifier cet utilisateur"
+            generateActivationLink: "Générer un lien d’activation"
+            generateForgottenPasswordLink: "Générer un lien de changement de mot de passe"
 
         create:
             title: "Création d’un nouvel utilisateur"
@@ -30,6 +35,28 @@ private_user:
             title: "Modification des données de %user%"
             submit: "Modifier les données"
             cancel: "Annuler les modifications"
+
+        generateActivationLink:
+            title: "Génération d’un lien d’activation pour %user%"
+            message: "Cette page vous permet de générer un lien d’activation pour l’utilisateur %user%. Ce lien activera le compte utilisateur et permettra de définir un mot de passe. Il ne sera valide que pendant un certain temps. Vous pouvez le transmettre à l’utilisateur si ce dernier n’a pas reçu d’email."
+            submit: "Générer un lien d’activation"
+            cancel: "Annuler l’opération"
+
+        activationLink:
+            title: "Lien d’activation pour %user%"
+            message: "Le lien est valide jusqu’au %expirationDate%."
+            back: "Retour à la liste des utilisateur"
+
+        generateForgottenPasswordLink:
+            title: "Génération d’un lien de changement de mot de passe pour %user%"
+            message: "Cette page vous permet de générer un lien de changement de mot de passe pour l’utilisateur %user%. Ce lien permettra de définir un nouveau mot de passe. Il ne sera valide que pendant un certain temps. Vous pouvez le transmettre à l’utilisateur si ce dernier n’a pas reçu d’email."
+            submit: "Générer un lien de changement de mot de passe"
+            cancel: "Annuler l’opération"
+
+        forgottenPasswordLink:
+            title: "Lien de changement de mot de passe pour %user%"
+            message: "Le lien est valide jusqu’au %expirationDate%."
+            back: "Retour à la liste des utilisateur"
 
     email:
         forgottenPassword:

@@ -121,7 +121,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setName(string $firstName, string $lastName): void
     {
@@ -130,7 +130,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setRoles(array $roles): void
     {
@@ -146,7 +146,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function setPassword(string $password)
     {
@@ -154,7 +154,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function enable(): void
     {
@@ -162,7 +162,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function disable(): void
     {
@@ -170,7 +170,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function generateToken(DateTime $tokenExpirationDate)
     {
@@ -179,7 +179,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function eraseToken()
     {
@@ -210,7 +210,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getEmailAddress(): string
     {
@@ -218,7 +218,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getFirstName(): string
     {
@@ -226,7 +226,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getLastName(): string
     {
@@ -234,7 +234,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getRoles()
     {
@@ -242,7 +242,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function getPassword()
     {
@@ -250,7 +250,7 @@ class User extends BaseUser
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function isEnabled(): bool
     {
@@ -258,17 +258,25 @@ class User extends BaseUser
     }
 
     /**
-     * @return string|null
+     * @inheritDoc
      */
-    public function getToken(): string
+    public function isActivated(): bool
+    {
+        return $this->password !== null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
     /**
-     * @return DateTime|null
+     * @inheritDoc
      */
-    public function getTokenExpirationDate(): DateTime
+    public function getTokenExpirationDate(): ?\DateTimeInterface
     {
         return $this->tokenExpirationDate;
     }

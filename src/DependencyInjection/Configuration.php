@@ -15,6 +15,9 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->fixXmlConfig('type')
             ->children()
+                ->scalarNode('sending_email_address')
+                    ->isRequired()
+                ->end() //sending_email_address
                 ->scalarNode('default_type')
                     ->defaultNull()
                     ->validate()

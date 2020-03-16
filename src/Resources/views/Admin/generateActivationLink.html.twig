@@ -1,0 +1,18 @@
+{% extends '@VinorcolaPrivateUser/layout.html.twig' %}
+
+{% block pageTitle %}{{ 'private_user.admin.generateActivationLink.title'|trans({ '%user%': user.displayName }) }}{% endblock %}
+{% block title %}{{ 'private_user.admin.generateActivationLink.title'|trans({ '%user%': user.displayName }) }}{% endblock %}
+
+
+
+{% block private_user_body %}
+    <p>{{ 'private_user.admin.generateActivationLink.message'|trans({ '%user%': user.displayName }) }}</p>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">{{ 'private_user.admin.generateActivationLink.submit'|trans }}</button>
+            <a href="{{ path('private_user.admin.list') }}">{{ 'private_user.admin.generateActivationLink.cancel'|trans }}</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
