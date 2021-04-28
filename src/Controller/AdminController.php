@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Form\EditUserType;
@@ -150,8 +151,12 @@ class AdminController extends Controller
      * @param UserRepositoryInterface $repository
      * @return Response
      */
-    public function activationLink(Request $request, string $userEmailAddress, UserRepositoryInterface $repository): Response
-    {
+    public function activationLink(
+        Request $request,
+        string $userEmailAddress,
+        UserRepositoryInterface $repository
+    ): Response {
+
         $user = $repository->find($userEmailAddress);
         if (!$user) {
             throw new NotFoundHttpException();
@@ -217,8 +222,12 @@ class AdminController extends Controller
      * @param UserRepositoryInterface $repository
      * @return Response
      */
-    public function forgottenPasswordLink(Request $request, string $userEmailAddress, UserRepositoryInterface $repository): Response
-    {
+    public function forgottenPasswordLink(
+        Request $request,
+        string $userEmailAddress,
+        UserRepositoryInterface $repository
+    ): Response {
+
         $user = $repository->find($userEmailAddress);
         if (!$user) {
             throw new NotFoundHttpException();

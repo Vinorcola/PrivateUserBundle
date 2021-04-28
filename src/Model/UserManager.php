@@ -18,27 +18,27 @@ class UserManager implements UserManagerInterface
     /**
      * Validity period (in minute) of a user token send by e-mail.
      */
-    private const TOKEN_VALIDITY = 20;
+    protected const TOKEN_VALIDITY = 20;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var UserPasswordEncoderInterface
      */
-    private $passwordEncoder;
+    protected $passwordEncoder;
 
     /**
      * @var TokenStorageInterface
      */
-    private $tokenStorage;
+    protected $tokenStorage;
 
     /**
      * @var Config
      */
-    private $config;
+    protected $config;
 
     /**
      * UserManager constructor.
@@ -76,7 +76,7 @@ class UserManager implements UserManagerInterface
         return self::UNKNOWN_USER_TYPE;
     }
 
-    private function getComparableRoles(array $roles): string
+    protected function getComparableRoles(array $roles): string
     {
         // Sort and serialize.
         sort($roles);
