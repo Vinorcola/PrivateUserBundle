@@ -18,6 +18,7 @@ You can configure several type of users by defining a list of specific roles:
 # config/packages/vinorcola_private_user.yaml
 
 vinorcola_private_user:
+    sending_email_address: "no-reply@example.com"
     types:
         user:
             roles: [ "ROLE_USER" ]
