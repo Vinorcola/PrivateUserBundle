@@ -23,6 +23,11 @@ interface UserInterface extends BaseUserInterface, PasswordAuthenticatedUserInte
     public function getEmailAddress(): string;
 
     /**
+     * {@inheritDoc}
+     */
+    public function getPassword(): ?string;
+
+    /**
      * Returns the first name of the user.
      *
      * @return string

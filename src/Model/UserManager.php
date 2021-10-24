@@ -30,7 +30,7 @@ class UserManager implements UserManagerInterface
     /**
      * @var UserPasswordHasherInterface
      */
-    protected $passwordEncoder;
+    protected $passwordHasher;
 
     /**
      * @var TokenStorageInterface
@@ -46,18 +46,18 @@ class UserManager implements UserManagerInterface
      * UserManager constructor.
      *
      * @param UserRepositoryInterface     $repository
-     * @param UserPasswordHasherInterface $passwordEncoder
+     * @param UserPasswordHasherInterface $passwordHasher
      * @param TokenStorageInterface       $tokenStorage
      * @param Config                      $config
      */
     public function __construct(
         UserRepositoryInterface $repository,
-        UserPasswordHasherInterface $passwordEncoder,
+        UserPasswordHasherInterface $passwordHasher,
         TokenStorageInterface $tokenStorage,
         Config $config
     ) {
         $this->repository = $repository;
-        $this->passwordEncoder = $passwordEncoder;
+        $this->passwordHasher = $passwordHasher;
         $this->tokenStorage = $tokenStorage;
         $this->config = $config;
     }
@@ -114,7 +114,7 @@ class UserManager implements UserManagerInterface
      */
     public function updatePassword(EditableUserInterface $user, ChangePassword $data): void
     {
-        $user->setPassword($this->passwordEncoder->hashPassword($user, $data->newPassword));
+        $user->setPassword($this->passwordHasher->hashPassword($user, $data->newPassword));
         $user->eraseToken();
     }
 
