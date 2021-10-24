@@ -3,7 +3,9 @@
 namespace Vinorcola\PrivateUserBundle\Entity;
 
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping;
+use LogicException;
 use Ramsey\Uuid\Uuid;
 use Vinorcola\PrivateUserBundle\Model\BaseUser;
 
@@ -121,7 +123,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setName(string $firstName, string $lastName): void
     {
@@ -130,7 +132,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function setRoles(array $roles): void
     {
@@ -146,15 +148,15 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function setPassword(string $password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function enable(): void
     {
@@ -162,7 +164,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function disable(): void
     {
@@ -170,7 +172,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function generateToken(DateTime $tokenExpirationDate)
     {
@@ -179,7 +181,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function eraseToken()
     {
@@ -203,14 +205,14 @@ class User extends BaseUser
     public function getType(): string
     {
         if ($this->type === null) {
-            throw new \LogicException('User type has not been set.');
+            throw new LogicException('User type has not been set.');
         }
 
         return $this->type;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getEmailAddress(): string
     {
@@ -218,7 +220,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getFirstName(): string
     {
@@ -226,7 +228,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getLastName(): string
     {
@@ -234,23 +236,23 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         return $this->roles;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function isEnabled(): bool
     {
@@ -258,7 +260,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function isActivated(): bool
     {
@@ -266,7 +268,7 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getToken(): ?string
     {
@@ -274,9 +276,9 @@ class User extends BaseUser
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function getTokenExpirationDate(): ?\DateTimeInterface
+    public function getTokenExpirationDate(): ?DateTimeInterface
     {
         return $this->tokenExpirationDate;
     }

@@ -2,6 +2,10 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
+use LogicException;
+use function array_keys;
+use function key_exists;
+
 class Config
 {
     /**
@@ -41,7 +45,7 @@ class Config
     {
         $type = $userType ?? $this->defaultUserType;
         if (!key_exists($type, $this->userTypes)) {
-            throw new \LogicException('Unknown user type "' . $type . '".');
+            throw new LogicException('Unknown user type "' . $type . '".');
         }
 
         return $this->userTypes[$type]['roles'];

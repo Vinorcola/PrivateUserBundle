@@ -10,7 +10,7 @@ use Vinorcola\PrivateUserBundle\Model\UserInterface;
 class UserRepository extends Repository implements UserRepositoryInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getEntityClass(): string
     {
@@ -18,7 +18,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function add(EditableUserInterface $user): void
     {
@@ -26,7 +26,15 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     */
+    public function updatePassword(EditableUserInterface $user): void
+    {
+        $this->entityManager->persist($user);
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function findAll(): array
     {
@@ -38,7 +46,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function find(string $emailAddress): ?EditableUserInterface
     {
@@ -50,7 +58,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findEnabled(string $emailAddress): ?UserInterface
     {
@@ -63,7 +71,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findByRegistrationToken(string $token): ?EditableUserInterface
     {
@@ -79,7 +87,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function findByPasswordChangeToken(string $token): ?EditableUserInterface
     {

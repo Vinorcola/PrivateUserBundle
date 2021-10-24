@@ -4,14 +4,16 @@ namespace Vinorcola\PrivateUserBundle\Model;
 
 use DateInterval;
 use DateTime;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 use Vinorcola\PrivateUserBundle\Data\CreateUser;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 use Vinorcola\PrivateUserBundle\Entity\User;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
+use function serialize;
+use function sort;
 
 class UserManager implements UserManagerInterface
 {
@@ -26,7 +28,7 @@ class UserManager implements UserManagerInterface
     protected $repository;
 
     /**
-     * @var UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
     protected $passwordEncoder;
 
@@ -43,14 +45,14 @@ class UserManager implements UserManagerInterface
     /**
      * UserManager constructor.
      *
-     * @param UserRepositoryInterface      $repository
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param TokenStorageInterface        $tokenStorage
-     * @param Config                       $config
+     * @param UserRepositoryInterface     $repository
+     * @param UserPasswordHasherInterface $passwordEncoder
+     * @param TokenStorageInterface       $tokenStorage
+     * @param Config                      $config
      */
     public function __construct(
         UserRepositoryInterface $repository,
-        UserPasswordEncoderInterface $passwordEncoder,
+        UserPasswordHasherInterface $passwordEncoder,
         TokenStorageInterface $tokenStorage,
         Config $config
     ) {
@@ -61,7 +63,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getUserType(UserInterface $user): string
     {
@@ -85,7 +87,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function create(CreateUser $data): UserInterface
     {
@@ -96,7 +98,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function update(EditableUserInterface $user, EditUser $data): void
     {
@@ -108,16 +110,16 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function updatePassword(EditableUserInterface $user, ChangePassword $data): void
     {
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $data->newPassword));
+        $user->setPassword($this->passwordEncoder->hashPassword($user, $data->newPassword));
         $user->eraseToken();
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function generateToken(EditableUserInterface $user): void
     {
@@ -127,7 +129,7 @@ class UserManager implements UserManagerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function logUserIn(UserInterface $user): void
     {

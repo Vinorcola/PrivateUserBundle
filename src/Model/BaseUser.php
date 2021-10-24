@@ -5,26 +5,34 @@ namespace Vinorcola\PrivateUserBundle\Model;
 abstract class BaseUser implements EditableUserInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * Not used: use an algorithm that generate the salt (example: bcrypt).
      *
      * @return null
      */
-    public function getSalt()
+    public function getSalt(): ?string
     {
         return null;
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->getEmailAddress();
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
+     */
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmailAddress();
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function getDisplayName(): string
     {
@@ -32,9 +40,9 @@ abstract class BaseUser implements EditableUserInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
 
     }

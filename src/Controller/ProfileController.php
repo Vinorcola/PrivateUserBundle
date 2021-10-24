@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 use Vinorcola\PrivateUserBundle\Form\ChangePasswordType;
@@ -60,19 +60,19 @@ class ProfileController extends Controller
     /**
      * @Route("/change-password", methods={"POST"}, name="change-password")
      *
-     * @param SessionInterface             $session
-     * @param Request                      $request
-     * @param UserRepositoryInterface      $repository
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param UserManagerInterface         $userManager
-     * @param TranslatorInterface          $translator
+     * @param SessionInterface            $session
+     * @param Request                     $request
+     * @param UserRepositoryInterface     $repository
+     * @param UserPasswordHasherInterface $passwordEncoder
+     * @param UserManagerInterface        $userManager
+     * @param TranslatorInterface         $translator
      * @return Response
      */
     public function changePassword(
         SessionInterface $session,
         Request $request,
         UserRepositoryInterface $repository,
-        UserPasswordEncoderInterface $passwordEncoder,
+        UserPasswordHasherInterface $passwordEncoder,
         UserManagerInterface $userManager,
         TranslatorInterface $translator
     ): Response {

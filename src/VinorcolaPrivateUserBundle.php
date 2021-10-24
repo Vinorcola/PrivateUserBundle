@@ -8,7 +8,7 @@ use Vinorcola\PrivateUserBundle\DependencyInjection\VinorcolaPrivateUserExtensio
 class VinorcolaPrivateUserBundle extends Bundle
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * @return VinorcolaPrivateUserExtension
      */
     public function getContainerExtension()

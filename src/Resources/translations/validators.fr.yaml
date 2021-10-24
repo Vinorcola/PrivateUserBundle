@@ -1,3 +1,8 @@
 private_user:
     invalid_password: "Mot de passe actuel invalide."
     passwords_not_matching: "Les mots de passe ne correspondent pas."
+
+    forgottenPassword:
+        requirePasswordChange:
+            unknownUser: "Utilisateur inconnu. Veuillez vérifier l'orthographe de votre adresse e-mail ou contacter l'administrateur de l'application."
+            notRegistered: "Votre compte utilisateur n'a pas encore été créé. Veuillez utiliser la fonctionnalité de création de compte."
