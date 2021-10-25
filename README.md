@@ -14,6 +14,8 @@ The administrator also has the possibility to disable the access to specific use
 
 ## Configuration
 
+This version must be used with Symfony 5.3. If you have a lower version, please use `v1` branch.
+
 The bundle can work without any configuration. It will create a user table.
 
 You can configure several types of users by defining a list of specific roles:
