@@ -34,7 +34,7 @@ Because the bundle cannot configure the `security`, you have to add another conf
 # config/packages/private_user.yaml
 
 security:
-    encoders:
+    password_hashers:
         Vinorcola\PrivateUserBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
@@ -45,6 +45,33 @@ security:
 ```
 
 Note that you can set the password encoder you want.
+
+Finally, the bundle routes must be added to the application.
+
+```yaml
+# config/routes/private_user.yaml
+
+admin:
+    resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/AdminController.php
+    type: annotation
+    prefix: /admin/user
+
+forgottenPassword:
+    resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/ForgottenPasswordController.php
+    type: annotation
+
+security:
+    resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/SecurityController.php
+    type: annotation
+
+registration:
+    resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/RegistrationController.php
+    type: annotation
+
+profile:
+    resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/ProfileController.php
+    type: annotation
+```
 
 ## Customize
 

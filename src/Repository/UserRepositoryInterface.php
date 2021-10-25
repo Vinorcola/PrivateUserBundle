@@ -15,6 +15,13 @@ interface UserRepositoryInterface
     public function add(EditableUserInterface $user): void;
 
     /**
+     * Persist the user's password in the repository.
+     *
+     * @param EditableUserInterface $user
+     */
+    public function updatePassword(EditableUserInterface $user): void;
+
+    /**
      * Find all the users.
      *
      * @return UserInterface[]

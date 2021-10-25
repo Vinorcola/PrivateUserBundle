@@ -2,13 +2,12 @@
 
 namespace Vinorcola\PrivateUserBundle\Controller;
 
+use IntlDateFormatter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vinorcola\PrivateUserBundle\Data\EditUser;
 use Vinorcola\PrivateUserBundle\Form\CreateUserType;
 use Vinorcola\PrivateUserBundle\Form\EditUserType;
@@ -165,7 +164,7 @@ class AdminController extends Controller
             throw new AccessDeniedHttpException('User is already activated.');
         }
 
-        $formatter = new \IntlDateFormatter($request->getLocale(), \IntlDateFormatter::SHORT, \IntlDateFormatter::MEDIUM);
+        $formatter = new IntlDateFormatter($request->getLocale(), IntlDateFormatter::SHORT, IntlDateFormatter::MEDIUM);
 
         return $this->render('@VinorcolaPrivateUser/Admin/activationLink.html.twig', [
             'user'           => $user,
@@ -236,7 +235,7 @@ class AdminController extends Controller
             throw new AccessDeniedHttpException('User is already activated.');
         }
 
-        $formatter = new \IntlDateFormatter($request->getLocale(), \IntlDateFormatter::SHORT, \IntlDateFormatter::MEDIUM);
+        $formatter = new IntlDateFormatter($request->getLocale(), IntlDateFormatter::SHORT, IntlDateFormatter::MEDIUM);
 
         return $this->render('@VinorcolaPrivateUser/Admin/forgottenPasswordLink.html.twig', [
             'user'           => $user,

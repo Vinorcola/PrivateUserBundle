@@ -2,9 +2,11 @@
 
 namespace Vinorcola\PrivateUserBundle\Model;
 
+use DateTimeInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
-interface UserInterface extends BaseUserInterface
+interface UserInterface extends BaseUserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Returns the user type.
@@ -19,6 +21,11 @@ interface UserInterface extends BaseUserInterface
      * @return string The email address
      */
     public function getEmailAddress(): string;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPassword(): ?string;
 
     /**
      * Returns the first name of the user.
@@ -69,7 +76,7 @@ interface UserInterface extends BaseUserInterface
     /**
      * Get the expiration date of the activation or forgotten password token.
      *
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getTokenExpirationDate(): ?\DateTimeInterface;
+    public function getTokenExpirationDate(): ?DateTimeInterface;
 }
