@@ -2,16 +2,13 @@
 
 namespace Vinorcola\PrivateUserBundle;
 
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Vinorcola\PrivateUserBundle\DependencyInjection\VinorcolaPrivateUserExtension;
 
 class VinorcolaPrivateUserBundle extends Bundle
 {
-    /**
-     * {@inheritDoc}
-     * @return VinorcolaPrivateUserExtension
-     */
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         return new VinorcolaPrivateUserExtension();
     }
