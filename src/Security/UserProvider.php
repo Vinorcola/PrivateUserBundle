@@ -4,6 +4,7 @@ namespace Vinorcola\PrivateUserBundle\Security;
 
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -74,7 +75,7 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
      * {@inheritDoc}
      * @param PrivateUserInterface $user
      */
-    public function upgradePassword(UserInterface $user, string $newHashedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if ($user instanceof EditableUserInterface) {
             $user->setPassword($newHashedPassword);
