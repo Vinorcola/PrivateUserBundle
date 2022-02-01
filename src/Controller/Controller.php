@@ -2,6 +2,7 @@
 
 namespace Vinorcola\PrivateUserBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
@@ -15,13 +16,20 @@ abstract class Controller extends AbstractController
     private $translator;
 
     /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
      * Controller constructor.
      *
-     * @param TranslatorInterface $translator
+     * @param TranslatorInterface    $translator
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
         $this->translator = $translator;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -49,6 +57,6 @@ abstract class Controller extends AbstractController
      */
     protected function saveDatabase(): void
     {
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
     }
 }
