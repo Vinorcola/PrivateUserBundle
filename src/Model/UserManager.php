@@ -133,8 +133,6 @@ class UserManager implements UserManagerInterface
      */
     public function logUserIn(UserInterface $user): void
     {
-        $this->tokenStorage->setToken(
-            new UsernamePasswordToken($user, null, 'main', $user->getRoles())
-        );
+        $this->tokenStorage->setToken(new UsernamePasswordToken($user, 'main', $user->getRoles()));
     }
 }
