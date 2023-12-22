@@ -18,20 +18,12 @@ use Vinorcola\PrivateUserBundle\Model\UserInterface;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
-/**
- * @Route("/profile", name="private_user.profile.")
- */
+#[Route('/profile', name: 'private_user.profile.')]
 class ProfileController extends Controller
 {
     private const CHANGE_PASSWORD_ERRORS_SESSION_KEY = 'private_user.change_password_errors';
 
-    /**
-     * @Route("", methods={"GET"}, name="profile")
-     *
-     * @param SessionInterface      $session
-     * @param UrlGeneratorInterface $urlGenerator
-     * @return Response
-     */
+    #[Route('', methods: 'GET', name: 'profile')]
     public function profile(SessionInterface $session, UrlGeneratorInterface $urlGenerator): Response
     {
         /** @var UserInterface $user */
@@ -57,17 +49,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/change-password", methods={"POST"}, name="change-password")
-     *
-     * @param SessionInterface            $session
-     * @param Request                     $request
-     * @param UserRepositoryInterface     $repository
-     * @param UserPasswordHasherInterface $passwordEncoder
-     * @param UserManagerInterface        $userManager
-     * @param TranslatorInterface         $translator
-     * @return Response
-     */
+    #[Route('/change-password', methods: 'POST', name: 'change-password')]
     public function changePassword(
         SessionInterface $session,
         Request $request,

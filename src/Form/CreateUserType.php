@@ -15,21 +15,13 @@ use Vinorcola\PrivateUserBundle\Model\Config;
 class CreateUserType extends AbstractType
 {
     /**
-     * @var Config
-     */
-    private $config;
-
-    /**
      * CreateUserType constructor.
      *
      * @param Config $config
      */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
+    public function __construct(private Config $config) {}
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('type', ChoiceType::class, [
@@ -46,7 +38,7 @@ class CreateUserType extends AbstractType
             // ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', CreateUser::class);
         $resolver->setDefault('label_format', 'private_user.user.%name%');

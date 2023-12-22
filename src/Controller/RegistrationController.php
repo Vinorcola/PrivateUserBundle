@@ -13,9 +13,7 @@ use Vinorcola\PrivateUserBundle\Model\EmailModel;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
-/**
- * @Route(name="private_user.registration.")
- */
+#[Route(name: 'private_user.registration.')]
 class RegistrationController extends Controller
 {
     /**
@@ -23,15 +21,7 @@ class RegistrationController extends Controller
      */
     private const USER_TO_REGISTER_SESSION_KEY = 'private_user.user_email_address';
 
-    /**
-     * @Route("/require-registration", methods={"GET", "POST"}, name="requireRegistration")
-     *
-     * @param Request                 $request
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @param EmailModel              $emailModel
-     * @return Response
-     */
+    #[Route('/require-registration', methods: ['GET', 'POST'], name: 'requireRegistration')]
     public function requireRegistration(
         Request $request,
         UserRepositoryInterface $repository,
@@ -66,12 +56,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/require-registration/confirm/{emailAddress}", methods={"GET"}, name="confirmRegistrationRequest")
-     *
-     * @param string $emailAddress
-     * @return Response
-     */
+    #[Route('/require-registration/confirm/{emailAddress}', methods: 'GET', name: 'confirmRegistrationRequest')]
     public function confirmRegistrationRequest(string $emailAddress): Response
     {
         return $this->render('@VinorcolaPrivateUser/Registration/confirmRegistrationRequest.html.twig', [
@@ -79,16 +64,9 @@ class RegistrationController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/register/{token}", methods={"GET"}, name="register", requirements={
-     *     "token": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
-     * })
-     *
-     * @param SessionInterface        $session
-     * @param string                  $token
-     * @param UserRepositoryInterface $repository
-     * @return Response
-     */
+    #[Route('/register/{token}', methods: 'GET', name: 'register', requirements: [
+        'token' => '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$',
+    ])]
     public function register(
         SessionInterface $session,
         string $token,
@@ -105,25 +83,13 @@ class RegistrationController extends Controller
         return $this->redirectToRoute('private_user.registration.definePassword');
     }
 
-    /**
-     * @Route("/register/reject", methods={"GET"}, name="rejectRegistration")
-     *
-     * @return Response
-     */
+    #[Route('/register/reject', methods: 'GET', name: 'rejectRegistration')]
     public function rejectRegistration(): Response
     {
         return $this->render('@VinorcolaPrivateUser/Registration/rejectRegistration.html.twig');
     }
 
-    /**
-     * @Route("/register/define-password", methods={"GET", "POST"}, name="definePassword")
-     *
-     * @param SessionInterface        $session
-     * @param Request                 $request
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('/register/define-password', methods: ['GET', 'POST'], name: 'definePassword')]
     public function definePassword(
         SessionInterface $session,
         Request $request,
@@ -156,11 +122,7 @@ class RegistrationController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/register/confirm", methods={"GET"}, name="confirmRegistration")
-     *
-     * @return Response
-     */
+    #[Route('/register/confirm', methods: 'GET', name: 'confirmRegistration')]
     public function confirmRegistration(): Response
     {
         return $this->render('@VinorcolaPrivateUser/Registration/confirmRegistration.html.twig');

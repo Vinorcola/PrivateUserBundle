@@ -14,15 +14,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 class PasswordAuthenticator extends AbstractAuthenticator
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator)
-    {
-        $this->urlGenerator = $urlGenerator;
-    }
+    public function __construct(private UrlGeneratorInterface $urlGenerator) {}
 
     public function supports(Request $request): ?bool
     {
@@ -31,7 +23,7 @@ class PasswordAuthenticator extends AbstractAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        throw new CustomUserMessageAuthenticationException('Not implemented lalala');
+        throw new CustomUserMessageAuthenticationException('Not implemented');
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

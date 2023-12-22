@@ -15,19 +15,11 @@ use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
 {
     /**
-     * @var UserRepositoryInterface
-     */
-    private $repository;
-
-    /**
      * UserProvider constructor.
      *
      * @param UserRepositoryInterface $repository
      */
-    public function __construct(UserRepositoryInterface $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(private UserRepositoryInterface $repository) {}
 
     /**
      * {@inheritDoc}

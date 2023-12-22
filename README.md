@@ -60,24 +60,24 @@ Finally, the bundle routes must be added to the application.
 
 admin:
     resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/AdminController.php
-    type: annotation
+    type: attribute
     prefix: /admin/user
 
 forgottenPassword:
     resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/ForgottenPasswordController.php
-    type: annotation
+    type: attribute
 
 security:
     resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/SecurityController.php
-    type: annotation
+    type: attribute
 
 registration:
     resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/RegistrationController.php
-    type: annotation
+    type: attribute
 
 profile:
     resource: ../../vendor/vinorcola/private-user-bundle/src/Controller/ProfileController.php
-    type: annotation
+    type: attribute
 ```
 
 ## Customize

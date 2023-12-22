@@ -10,26 +10,6 @@ use Twig\Environment as TemplateEngine;
 class EmailModel
 {
     /**
-     * @var MailerInterface
-     */
-    private $mailer;
-
-    /**
-     * @var TemplateEngine
-     */
-    private $twigEnvironment;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var string
-     */
-    private $fromAddress;
-
-    /**
      * EmailModel constructor.
      *
      * @param MailerInterface     $mailer
@@ -38,16 +18,11 @@ class EmailModel
      * @param string              $fromAddress
      */
     public function __construct(
-        MailerInterface $mailer,
-        TemplateEngine $twigEnvironment,
-        TranslatorInterface $translator,
-        string $fromAddress
-    ) {
-        $this->mailer = $mailer;
-        $this->twigEnvironment = $twigEnvironment;
-        $this->translator = $translator;
-        $this->fromAddress = $fromAddress;
-    }
+        private MailerInterface $mailer,
+        private TemplateEngine $twigEnvironment,
+        private TranslatorInterface $translator,
+        private string $fromAddress
+    ) {}
 
     /**
      * @param UserInterface $user

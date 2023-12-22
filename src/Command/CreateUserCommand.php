@@ -5,6 +5,7 @@ namespace Vinorcola\PrivateUserBundle\Command;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,39 +17,16 @@ use Vinorcola\PrivateUserBundle\Model\Config;
 use Vinorcola\PrivateUserBundle\Model\UserManager;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
+#[AsCommand('user:create')]
 class CreateUserCommand extends Command
 {
-    /**
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * @var UserManager
-     */
-    private $userManager;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private $database;
-
     public function __construct(
-        Config $config,
-        UserRepositoryInterface $repository,
-        UserManager $userManager,
-        EntityManagerInterface $database
+        private Config $config,
+        private UserRepositoryInterface $repository,
+        private UserManager $userManager,
+        private EntityManagerInterface $database
     ) {
-        parent::__construct('user:create');
-        $this->config = $config;
-        $this->repository = $repository;
-        $this->userManager = $userManager;
-        $this->database = $database;
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

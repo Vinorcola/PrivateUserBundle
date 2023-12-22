@@ -16,18 +16,10 @@ use Vinorcola\PrivateUserBundle\Model\EditableUserInterface;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
-/**
- * @Route(name="private_user.admin.")
- */
+#[Route(name: 'private_user.admin.')]
 class AdminController extends Controller
 {
-    /**
-     * @Route("", methods={"GET"}, name="list")
-     *
-     * @param UserRepositoryInterface $userRepository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('', methods: 'GET', name: 'list')]
     public function list(UserRepositoryInterface $userRepository, UserManagerInterface $userManager): Response
     {
         $users = $userRepository->findAll();
@@ -41,13 +33,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/create", methods={"GET", "POST"}, name="create")
-     *
-     * @param Request              $request
-     * @param UserManagerInterface $userManager
-     * @return Response
-     */
+    #[Route('/create', methods: 'GET', name: 'create')]
     public function create(Request $request, UserManagerInterface $userManager): Response
     {
         $form = $this->createForm(CreateUserType::class);
@@ -64,15 +50,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/edit/{userEmailAddress}", methods={"GET", "POST"}, name="edit")
-     *
-     * @param Request                 $request
-     * @param string                  $userEmailAddress
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('/edit/{userEmailAddress}', methods: ['GET', 'POST'], name: 'edit')]
     public function edit(
         Request $request,
         string $userEmailAddress,
@@ -101,15 +79,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{userEmailAddress}/generate-activation-link", methods={"GET", "POST"}, name="generateActivationLink")
-     *
-     * @param Request                 $request
-     * @param string                  $userEmailAddress
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('/{userEmailAddress}/generate-activation-link', methods: ['GET', 'POST'], name: 'generateActivationLink')]
     public function generateActivationLink(
         Request $request,
         string $userEmailAddress,
@@ -142,14 +112,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{userEmailAddress}/activation-link", methods={"GET"}, name="activationLink")
-     *
-     * @param Request                 $request
-     * @param string                  $userEmailAddress
-     * @param UserRepositoryInterface $repository
-     * @return Response
-     */
+    #[Route('/{userEmailAddress}/activation-link', methods: 'GET', name: 'activationLink')]
     public function activationLink(
         Request $request,
         string $userEmailAddress,
@@ -172,15 +135,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{userEmailAddress}/generate-forgotten-password-link", methods={"GET", "POST"}, name="generateForgottenPasswordLink")
-     *
-     * @param Request                 $request
-     * @param string                  $userEmailAddress
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('/{userEmailAddress}/generate-forgotten-password-link', methods: ['GET', 'POST'], name: 'generateForgottenPasswordLink')]
     public function generateForgottenPasswordLink(
         Request $request,
         string $userEmailAddress,
@@ -213,14 +168,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/{userEmailAddress}/forgotten-password-link", methods={"GET"}, name="forgottenPasswordLink")
-     *
-     * @param Request                 $request
-     * @param string                  $userEmailAddress
-     * @param UserRepositoryInterface $repository
-     * @return Response
-     */
+    #[Route('/{userEmailAddress}/forgotten-password-link', methods: 'GET', name: 'forgottenPasswordLink')]
     public function forgottenPasswordLink(
         Request $request,
         string $userEmailAddress,

@@ -13,9 +13,7 @@ use Vinorcola\PrivateUserBundle\Model\EmailModel;
 use Vinorcola\PrivateUserBundle\Model\UserManagerInterface;
 use Vinorcola\PrivateUserBundle\Repository\UserRepositoryInterface;
 
-/**
- * @Route(name="private_user.forgottenPassword.")
- */
+#[Route(name: 'private_user.forgottenPassword.')]
 class ForgottenPasswordController extends Controller
 {
     /**
@@ -23,15 +21,7 @@ class ForgottenPasswordController extends Controller
      */
     private const USER_TO_UPDATE_SESSION_KEY = 'private_user.user_email_address';
 
-    /**
-     * @Route("/declare-forgotten-password", methods={"GET", "POST"}, name="requirePasswordChange")
-     *
-     * @param Request                 $request
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @param EmailModel              $emailModel
-     * @return Response
-     */
+    #[Route('/declare-forgotten-password', methods: ['GET', 'POST'], name: 'requirePasswordChange')]
     public function requirePasswordChange(
         Request $request,
         UserRepositoryInterface $repository,
@@ -66,12 +56,7 @@ class ForgottenPasswordController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/declare-forgotten-password/confirm/{emailAddress}", methods={"GET"}, name="confirmPasswordChangeRequest")
-     *
-     * @param string $emailAddress
-     * @return Response
-     */
+    #[Route('/declare-forgotten-password/confirm/{emailAddress}', methods: 'GET', name: 'confirmPasswordChangeRequest')]
     public function confirmPasswordChangeRequest(string $emailAddress): Response
     {
         return $this->render('@VinorcolaPrivateUser/ForgottenPassword/confirmPasswordChangeRequest.html.twig', [
@@ -79,16 +64,9 @@ class ForgottenPasswordController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/change-password/{token}", methods={"GET"}, name="changePassword", requirements={
-     *     "token": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
-     * })
-     *
-     * @param SessionInterface        $session
-     * @param string                  $token
-     * @param UserRepositoryInterface $repository
-     * @return Response
-     */
+    #[Route('/change-password/{token}', methods: 'GET', name: 'changePassword', requirements: [
+        'token' => '^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$',
+    ])]
     public function changePassword(
         SessionInterface $session,
         string $token,
@@ -105,25 +83,13 @@ class ForgottenPasswordController extends Controller
         return $this->redirectToRoute('private_user.forgottenPassword.definePassword');
     }
 
-    /**
-     * @Route("/change-password/reject", methods={"GET"}, name="rejectPasswordChange")
-     *
-     * @return Response
-     */
+    #[Route('/change-password/reject', methods: 'GET', name: 'rejectPasswordChange')]
     public function rejectPasswordChange(): Response
     {
         return $this->render('@VinorcolaPrivateUser/ForgottenPassword/rejectPasswordChange.html.twig');
     }
 
-    /**
-     * @Route("/change-password/define-password", methods={"GET", "POST"}, name="definePassword")
-     *
-     * @param SessionInterface        $session
-     * @param Request                 $request
-     * @param UserRepositoryInterface $repository
-     * @param UserManagerInterface    $userManager
-     * @return Response
-     */
+    #[Route('/change-password/define-password', methods: ['GET', 'POST'], name: 'definePassword')]
     public function definePassword(
         SessionInterface $session,
         Request $request,
@@ -156,11 +122,7 @@ class ForgottenPasswordController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/change-password/confirm", methods={"GET"}, name="confirmPasswordChange")
-     *
-     * @return Response
-     */
+    #[Route('/change-password/confirm', methods: 'GET', name: 'confirmPasswordChange')]
     public function confirmPasswordChange(): Response
     {
         return $this->render('@VinorcolaPrivateUser/ForgottenPassword/confirmPasswordChange.html.twig');

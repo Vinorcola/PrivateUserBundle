@@ -8,11 +8,6 @@ use Doctrine\ORM\QueryBuilder;
 abstract class Repository
 {
     /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
-
-    /**
      * Return the class of the entity handled by the repository.
      *
      * @return string
@@ -24,10 +19,7 @@ abstract class Repository
      *
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(protected EntityManagerInterface $entityManager) {}
 
     /**
      * Create a query builder.

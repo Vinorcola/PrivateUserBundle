@@ -23,26 +23,6 @@ class UserManager implements UserManagerInterface
     protected const TOKEN_VALIDITY = 20;
 
     /**
-     * @var UserRepositoryInterface
-     */
-    protected $repository;
-
-    /**
-     * @var UserPasswordHasherInterface
-     */
-    protected $passwordHasher;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
-     * @var Config
-     */
-    protected $config;
-
-    /**
      * UserManager constructor.
      *
      * @param UserRepositoryInterface     $repository
@@ -51,16 +31,11 @@ class UserManager implements UserManagerInterface
      * @param Config                      $config
      */
     public function __construct(
-        UserRepositoryInterface $repository,
-        UserPasswordHasherInterface $passwordHasher,
-        TokenStorageInterface $tokenStorage,
-        Config $config
-    ) {
-        $this->repository = $repository;
-        $this->passwordHasher = $passwordHasher;
-        $this->tokenStorage = $tokenStorage;
-        $this->config = $config;
-    }
+        private UserRepositoryInterface $repository,
+        private UserPasswordHasherInterface $passwordHasher,
+        private TokenStorageInterface $tokenStorage,
+        private Config $config
+    ) {}
 
     /**
      * {@inheritDoc}

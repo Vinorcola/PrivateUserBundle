@@ -8,98 +8,54 @@ use Doctrine\ORM\Mapping;
 use LogicException;
 use Ramsey\Uuid\Uuid;
 use Vinorcola\PrivateUserBundle\Model\BaseUser;
+use function mb_strtolower;
 
-/**
- * @Mapping\Entity()
- * @Mapping\Table(name="`user`")
- */
+#[Mapping\Entity]
+#[Mapping\Table(name: '`user`')]
 class User extends BaseUser
 {
-    /**
-     * @var string
-     *
-     * @Mapping\Column(type="guid")
-     * @Mapping\Id()
-     */
-    private $id;
+    #[Mapping\Column(type: 'guid')]
+    #[Mapping\Id]
+    private string $id;
+
+    #[Mapping\Column(type: 'string', length: 254)]
+    private string $emailAddress;
+
+    #[Mapping\Column(type: 'string', length: 254, unique: true)]
+    private string $uniqueEmailAddress;
+
+    #[Mapping\Column(type: 'string', length: 80)]
+    private string $firstName;
+
+    #[Mapping\Column(type: 'string', length: 80)]
+    private string $lastName;
+
+    #[Mapping\Column(type: 'json', options: [
+        'jsonb' => true,
+    ])]
+    private array $roles;
 
     /**
-     * @var string
-     *
-     * @Mapping\Column(type="string", length=254)
+     * Note: Not saved in database since is it processed from roles.
      */
-    private $emailAddress;
+    private string|null $type;
 
-    /**
-     * @var string
-     *
-     * @Mapping\Column(type="string",length=254, unique=true)
-     */
-    private $uniqueEmailAddress;
+    #[Mapping\Column(type: 'string', length: 60, nullable: true)]
+    private string|null $password;
 
-    /**
-     * @var string
-     *
-     * @Mapping\Column(type="string", length=80)
-     */
-    private $firstName;
+    #[Mapping\Column(type: 'boolean')]
+    private bool $enabled;
 
-    /**
-     * @var string
-     *
-     * @Mapping\Column(type="string", length=80)
-     */
-    private $lastName;
+    #[Mapping\Column(type: 'guid', nullable: true)]
+    private string|null $token;
 
-    /**
-     * @var array
-     *
-     * @Mapping\Column(type="json", options={"jsonb": true})
-     */
-    private $roles;
-
-    /**
-     * @var string|null
-     *
-     * Note: Not save in database since is it processed from roles.
-     */
-    private $type;
-
-    /**
-     * @var string|null
-     *
-     * @Mapping\Column(type="string", length=60, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var bool
-     *
-     * @Mapping\Column(type="boolean")
-     */
-    private $enabled;
-
-    /**
-     * @var string|null
-     *
-     * @Mapping\Column(type="guid", nullable=true)
-     */
-    private $token;
-
-    /**
-     * @var DateTime|null
-     *
-     * @Mapping\Column(type="datetime", nullable=true)
-     */
-    private $tokenExpirationDate;
+    #[Mapping\Column(type: 'datetime', nullable: true)]
+    private DateTime|null $tokenExpirationDate;
 
     /**
      * User constructor.
      *
-     * @param string $emailAddress
-     * @param string $firstName
-     * @param string $lastName
-     * @param array  $roles
+     * @param string[] $roles
      */
     public function __construct(string $emailAddress, string $firstName, string $lastName, array $roles = [])
     {

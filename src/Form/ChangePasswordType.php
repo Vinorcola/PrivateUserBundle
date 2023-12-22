@@ -11,7 +11,7 @@ use Vinorcola\PrivateUserBundle\Data\ChangePassword;
 
 class ChangePasswordType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['require_current_password']) {
             $builder
@@ -34,7 +34,7 @@ class ChangePasswordType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', ChangePassword::class);
         $resolver->setDefault('require_current_password', false);

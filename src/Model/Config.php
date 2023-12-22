@@ -8,15 +8,8 @@ use function key_exists;
 
 class Config
 {
-    /**
-     * @var array
-     */
-    private $userTypes;
-
-    /**
-     * @var string
-     */
-    private $defaultUserType;
+    private array $userTypes;
+    private string $defaultUserType;
 
     /**
      * Config constructor.

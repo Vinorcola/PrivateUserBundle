@@ -11,7 +11,7 @@ use Vinorcola\PrivateUserBundle\Model\EmailModel;
 
 class VinorcolaPrivateUserExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processedConfig = $this->processConfiguration(new Configuration(), $configs);
 
