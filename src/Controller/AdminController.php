@@ -33,7 +33,7 @@ class AdminController extends Controller
         ]);
     }
 
-    #[Route('/create', methods: 'GET', name: 'create')]
+    #[Route('/create', methods: ['GET', 'POST'], name: 'create')]
     public function create(Request $request, UserManagerInterface $userManager): Response
     {
         $form = $this->createForm(CreateUserType::class);
