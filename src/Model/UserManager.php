@@ -31,10 +31,10 @@ class UserManager implements UserManagerInterface
      * @param Config                      $config
      */
     public function __construct(
-        private UserRepositoryInterface $repository,
-        private UserPasswordHasherInterface $passwordHasher,
-        private TokenStorageInterface $tokenStorage,
-        private Config $config
+        protected UserRepositoryInterface $repository,
+        protected UserPasswordHasherInterface $passwordHasher,
+        protected TokenStorageInterface $tokenStorage,
+        protected Config $config
     ) {}
 
     /**
